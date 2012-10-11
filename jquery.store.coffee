@@ -1,20 +1,48 @@
+# jQuery Store
+
 (($) ->
   $.fn.extend
     store:
       get: (key) ->
-        value_string = @storage.getItem(key)
-        if typeof value_string == 'undefined' or value_string == null
-          value_string
+        wrap_string
+        if @storage_valid
+          wrap_string = @storage.getItem(key)
         else
-          JSON.parse(value_string)
-        end
-      remove: (key) ->
-        @storage.removeItem(key)
-      remove_all: ->
-        @storage.clear()
-      set: (key, value) ->
-        value_string = JSON.stringify(value)
-        @storage.setItem(key, value_string)
-      storage: localStorage
+          wrap_string = @storage[key]
 
+        if typeof wrap_string == 'undefined' or wrap_string == null
+          wrap_string
+        else
+          wrap = JSON.parse(wrap_string)
+          wrap[0]
+        end
+      initialize: ->
+        if typeof localStorage == 'undefined'
+          # localStorage is invalid
+          @storage = {}
+          @storage_valid = false
+        else
+          # localStorage is valid
+          @storage = localStorage
+          @storage_valid = true
+      remove: (key) ->
+        if @storage_valid
+          @storage.removeItem(key)
+        else
+          delete @storage[key]
+      remove_all: ->
+        if @storage_valid
+          @storage.clear()
+        else
+          @storage = {}
+      set: (key, value) ->
+        wrap = [value]
+        wrap_string = JSON.stringify(wrap)
+        if @storage_valid
+          @storage.setItem(key, wrap_string)
+        else
+          @storage[key] = wrap_string
+      storage: {}
+      storage_valid: false
+  $.store.initialize()
 ) jQuery
