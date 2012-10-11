@@ -1,7 +1,12 @@
 # jQuery Store
 #
 # jQuery Store can store almost all type of objects.
-# JSON.parse and JSON.stringify used
+#
+# In the codes, JSON.parse and JSON.stringify used.
+# I recommend to insert this code in your html:
+# <!--[if lt IE 8]>
+# <script src="./JSON-js/json2.js"></script>
+# <![endif]-->
 
 (($) ->
   $.fn.extend
