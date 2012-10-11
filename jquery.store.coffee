@@ -1,4 +1,6 @@
 # jQuery Store
+#
+# jQuery Store can store almost all type of objects.
 
 (($) ->
   $.fn.extend
