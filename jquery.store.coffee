@@ -1,11 +1,15 @@
 # jQuery Store
 #
 # jQuery Store can store almost all type of objects.
+# JSON.parse and JSON.stringify used
 
 (($) ->
   $.fn.extend
     store:
+      generate_key: (key) ->
+        "#{@prefix}#{key}"
       get: (key) ->
+        key = @generate_key(key)
         wrap_string
         if @storage_valid
           wrap_string = @storage.getItem(key)
@@ -21,13 +25,25 @@
       initialize: ->
         if typeof localStorage == 'undefined'
           # localStorage is invalid
-          @storage = {}
           @storage_valid = false
         else
-          # localStorage is valid
+          test_key = 'jqstore__test'
+          localStorage.setItem(test_key, 'valid')
+          value = localStorage.getItem(test_key)
+          if value and value == 'valid'
+            # localStorage is valid
+            @storage_valid = true
+          else
+            # localStorage is invalid
+            @storage_valid = false
+        if @storage_valid
+          # if localStorage is invalid, use just a hash
+          @storage = {}
+        else
           @storage = localStorage
-          @storage_valid = true
+      prefix: 'jqstore_'
       remove: (key) ->
+        key = @generate_key(key)
         if @storage_valid
           @storage.removeItem(key)
         else
@@ -40,6 +56,7 @@
       set: (key, value) ->
         wrap = [value]
         wrap_string = JSON.stringify(wrap)
+        key = @generate_key(key)
         if @storage_valid
           @storage.setItem(key, wrap_string)
         else
