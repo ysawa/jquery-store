@@ -1,6 +1,6 @@
-# jQuery Store
+# jqStore
 #
-# jQuery Store can store almost all type of objects.
+# jqStore can store almost all type of objects.
 
 (($) ->
   $.extend
@@ -8,17 +8,20 @@
       generate_key: (key) ->
         "#{@prefix}#{key}"
       get: (key) ->
-        key = @generate_key(key)
+        that = jqstore
+        key = that.generate_key(key)
         value_string
-        if @storage_valid
-          value_string = @storage.getItem(key)
+        if that.storage_valid
+          value_string = that.storage.getItem(key)
         else
-          value_string = @storage[key]
+          value_string = that.storage[key]
 
         if typeof value_string == 'undefined' or value_string == null
           value_string
+        else if value_string == 'undefined'
+          undefined
         else
-          @parse_json(value_string)
+          that.parse_json(value_string)
       initialize: ->
         @storage_valid = false
         unless typeof localStorage == 'undefined'
@@ -29,9 +32,9 @@
             # localStorage is valid
             @storage_valid = true
         if @storage_valid
-          # if localStorage is invalid, use just a hash
           @storage = localStorage
         else
+          # if localStorage is invalid, use just a hash
           @storage = {}
         if window.JSON and window.JSON.stringify
           @json_object = window.JSON
@@ -47,49 +50,48 @@
         "\"": "\\\""
         "\\": "\\\\"
       json_escape_character: (character) ->
-        @json_special_characters[character] or
+        that = jqstore
+        that.json_special_characters[character] or
           "\\u" + ("0000" + character.charCodeAt(0).toString(16)).slice(-4)
-      parse_json: $.parseJSON
+      parse_json: (string) ->
+        $.parseJSON(string)
       prefix: 'jqstore_'
       remove: (key) ->
-        key = @generate_key(key)
-        if @storage_valid
-          @storage.removeItem(key)
+        that = jqstore
+        key = that.generate_key(key)
+        if that.storage_valid
+          that.storage.removeItem(key)
         else
-          delete @storage[key]
+          delete that.storage[key]
       remove_all: ->
-        if @storage_valid
-          @storage.clear()
+        that = jqstore
+        if that.storage_valid
+          that.storage.clear()
         else
-          @storage = {}
+          that.storage = {}
       set: (key, value) ->
-        value_string = @stringify_json(value)
-        key = @generate_key(key)
-        if @storage_valid
-          @storage.setItem(key, value_string)
+        that = jqstore
+        value_string = that.stringify_json(value)
+        key = that.generate_key(key)
+        if that.storage_valid
+          that.storage.setItem(key, value_string)
         else
-          @storage[key] = value_string
+          that.storage[key] = value_string
       storage: {}
       storage_valid: false
       stringify_json: (data) ->
-        return @json_object.stringify(data) if @json_object
-        that = @
+        that = jqstore
+        return that.json_object.stringify(data) if that.json_object
         switch $.type(data)
           when "string"
-            json_escape_character = (string) ->
-              that.json_escape_character(string)
-            return "\"" + data.replace(/[\x00-\x1f\\"]/g, json_escape_character) + "\""
+            return "\"" + data.replace(/[\x00-\x1f\\"]/g, that.json_escape_character) + "\""
           when "array"
-            stringify_json = (object) ->
-              that.stringify_json(object)
-            return "[" + $.map(data, stringify_json) + "]"
+            return "[" + $.map(data, that.stringify_json) + "]"
           when "object"
             string = []
-            stringify_json = (object) ->
-              that.stringify_json(object)
             $.each data, (key, value) ->
-              json = stringify_json(value)
-              string.push stringify_json(key) + ":" + json if json
+              json = that.stringify_json(value)
+              string.push that.stringify_json(key) + ":" + json if json
             return "{" + string + "}"
           when "number", "boolean"
             return "" + data
@@ -107,9 +109,11 @@
             minute = "0" + minute if minute < 10
             second = "0" + second if second < 10
             return "\"#{year}-#{month}-#{day}T#{hour}:#{minute}:#{second}.#{milli}Z\""
+          when "function"
+            return undefined
           when "undefined", "null"
             return "null"
         data
-
-  $.store.initialize()
+  jqstore = $.store
+  jqstore.initialize()
 ) jQuery
