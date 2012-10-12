@@ -53,7 +53,7 @@
       json_escape_character: (character) ->
         that = jqstore
         that.json_special_characters[character] or
-          "\\u" + ("0000" + character.charCodeAt(0).toString(16)).slice(-4)
+          "\\u" + ('0000' + character.charCodeAt(0).toString(16)).slice(-4)
       parse_json: (string) ->
         $.parseJSON(string)
       prefix: 'jqstore_'
@@ -84,26 +84,28 @@
         that = jqstore
         return that.json_object.stringify(data) if that.json_object
         switch $.type(data)
-          when "string"
-            return "\"" + data.replace(/[\x00-\x1f\\"]/g, that.json_escape_character) + "\""
-          when "array"
-            return "[" + $.map(data, that.stringify_json) + "]"
-          when "object"
+          when 'string'
+            return '"' + data.replace(/[\x00-\x1f\\"]/g, that.json_escape_character) + '"'
+          when 'array'
+            return '[' + $.map(data, that.stringify_json) + ']'
+          when 'object'
             string = []
             $.each data, (key, value) ->
-              json = that.stringify_json(value)
-              string.push that.stringify_json(key) + ":" + json if typeof json == 'undefined'
-            return "{" + string + "}"
-          when "number", "boolean"
-            return "" + data
-          when "date"
+              value_json = that.stringify_json(value)
+              if typeof value_json == 'undefined'
+                key_json = that.stringify_json(key)
+                string.push "#{key_json}:#{value_json}"
+            return '{' + string + '}'
+          when 'number', 'boolean'
+            return '' + data
+          when 'date'
             return that.stringify_json_date(data)
-          when "regexp"
-            return "{}"
-          when "function", "undefined"
+          when 'regexp'
+            return '{}'
+          when 'function', 'undefined'
             return undefined
-          when "null"
-            return "null"
+          when 'null'
+            return 'null'
         data
       stringify_json_date: (data) ->
         year = data.getUTCFullYear()
@@ -113,11 +115,11 @@
         minute = data.getUTCMinutes()
         second = data.getUTCSeconds()
         milli = data.getUTCMilliseconds()
-        month = "0" + month if month < 10
-        day = "0" + day if day < 10
-        hour = "0" + hour if hour < 10
-        minute = "0" + minute if minute < 10
-        second = "0" + second if second < 10
+        month = '0' + month if month < 10
+        day = '0' + day if day < 10
+        hour = '0' + hour if hour < 10
+        minute = '0' + minute if minute < 10
+        second = '0' + second if second < 10
         "\"#{year}-#{month}-#{day}T#{hour}:#{minute}:#{second}.#{milli}Z\""
 
   jqstore = $.store

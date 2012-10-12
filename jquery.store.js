@@ -61,7 +61,7 @@
         json_escape_character: function(character) {
           var that;
           that = jqstore;
-          return that.json_special_characters[character] || "\\u" + ("0000" + character.charCodeAt(0).toString(16)).slice(-4);
+          return that.json_special_characters[character] || "\\u" + ('0000' + character.charCodeAt(0).toString(16)).slice(-4);
         },
         parse_json: function(string) {
           return $.parseJSON(string);
@@ -106,32 +106,33 @@
             return that.json_object.stringify(data);
           }
           switch ($.type(data)) {
-            case "string":
-              return "\"" + data.replace(/[\x00-\x1f\\"]/g, that.json_escape_character) + "\"";
-            case "array":
-              return "[" + $.map(data, that.stringify_json) + "]";
-            case "object":
+            case 'string':
+              return '"' + data.replace(/[\x00-\x1f\\"]/g, that.json_escape_character) + '"';
+            case 'array':
+              return '[' + $.map(data, that.stringify_json) + ']';
+            case 'object':
               string = [];
               $.each(data, function(key, value) {
-                var json;
-                json = that.stringify_json(value);
-                if (typeof json === 'undefined') {
-                  return string.push(that.stringify_json(key) + ":" + json);
+                var key_json, value_json;
+                value_json = that.stringify_json(value);
+                if (typeof value_json === 'undefined') {
+                  key_json = that.stringify_json(key);
+                  return string.push("" + key_json + ":" + value_json);
                 }
               });
-              return "{" + string + "}";
-            case "number":
-            case "boolean":
-              return "" + data;
-            case "date":
+              return '{' + string + '}';
+            case 'number':
+            case 'boolean':
+              return '' + data;
+            case 'date':
               return that.stringify_json_date(data);
-            case "regexp":
-              return "{}";
-            case "function":
-            case "undefined":
+            case 'regexp':
+              return '{}';
+            case 'function':
+            case 'undefined':
               return void 0;
-            case "null":
-              return "null";
+            case 'null':
+              return 'null';
           }
           return data;
         },
@@ -145,19 +146,19 @@
           second = data.getUTCSeconds();
           milli = data.getUTCMilliseconds();
           if (month < 10) {
-            month = "0" + month;
+            month = '0' + month;
           }
           if (day < 10) {
-            day = "0" + day;
+            day = '0' + day;
           }
           if (hour < 10) {
-            hour = "0" + hour;
+            hour = '0' + hour;
           }
           if (minute < 10) {
-            minute = "0" + minute;
+            minute = '0' + minute;
           }
           if (second < 10) {
-            second = "0" + second;
+            second = '0' + second;
           }
           return "\"" + year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + "." + milli + "Z\"";
         }
