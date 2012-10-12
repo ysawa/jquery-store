@@ -100,7 +100,7 @@
         storage: {},
         storage_valid: false,
         stringify_json: function(data) {
-          var day, hour, milli, minute, month, second, string, that, year;
+          var string, that;
           that = jqstore;
           if (that.json_object) {
             return that.json_object.stringify(data);
@@ -124,29 +124,7 @@
             case "boolean":
               return "" + data;
             case "date":
-              year = data.getUTCFullYear();
-              month = data.getUTCMonth() + 1;
-              day = data.getUTCDate();
-              hour = data.getUTCHours();
-              minute = data.getUTCMinutes();
-              second = data.getUTCSeconds();
-              milli = data.getUTCMilliseconds();
-              if (month < 10) {
-                month = "0" + month;
-              }
-              if (day < 10) {
-                day = "0" + day;
-              }
-              if (hour < 10) {
-                hour = "0" + hour;
-              }
-              if (minute < 10) {
-                minute = "0" + minute;
-              }
-              if (second < 10) {
-                second = "0" + second;
-              }
-              return "\"" + year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + "." + milli + "Z\"";
+              return that.stringify_json_date(data);
             case "regexp":
               return "{}";
             case "function":
@@ -157,6 +135,32 @@
               return void 0;
           }
           return data;
+        },
+        stringify_json_date: function(data) {
+          var day, hour, milli, minute, month, second, year;
+          year = data.getUTCFullYear();
+          month = data.getUTCMonth() + 1;
+          day = data.getUTCDate();
+          hour = data.getUTCHours();
+          minute = data.getUTCMinutes();
+          second = data.getUTCSeconds();
+          milli = data.getUTCMilliseconds();
+          if (month < 10) {
+            month = "0" + month;
+          }
+          if (day < 10) {
+            day = "0" + day;
+          }
+          if (hour < 10) {
+            hour = "0" + hour;
+          }
+          if (minute < 10) {
+            minute = "0" + minute;
+          }
+          if (second < 10) {
+            second = "0" + second;
+          }
+          return "\"" + year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + "." + milli + "Z\"";
         }
       }
     });

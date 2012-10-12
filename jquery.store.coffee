@@ -97,19 +97,7 @@
           when "number", "boolean"
             return "" + data
           when "date"
-            year = data.getUTCFullYear()
-            month = data.getUTCMonth() + 1
-            day = data.getUTCDate()
-            hour = data.getUTCHours()
-            minute = data.getUTCMinutes()
-            second = data.getUTCSeconds()
-            milli = data.getUTCMilliseconds()
-            month = "0" + month if month < 10
-            day = "0" + day if day < 10
-            hour = "0" + hour if hour < 10
-            minute = "0" + minute if minute < 10
-            second = "0" + second if second < 10
-            return "\"#{year}-#{month}-#{day}T#{hour}:#{minute}:#{second}.#{milli}Z\""
+            return that.stringify_json_date(data)
           when "regexp"
             return "{}"
           when "function"
@@ -119,6 +107,21 @@
           when "undefined"
             return undefined
         data
+      stringify_json_date: (data) ->
+        year = data.getUTCFullYear()
+        month = data.getUTCMonth() + 1
+        day = data.getUTCDate()
+        hour = data.getUTCHours()
+        minute = data.getUTCMinutes()
+        second = data.getUTCSeconds()
+        milli = data.getUTCMilliseconds()
+        month = "0" + month if month < 10
+        day = "0" + day if day < 10
+        hour = "0" + hour if hour < 10
+        minute = "0" + minute if minute < 10
+        second = "0" + second if second < 10
+        "\"#{year}-#{month}-#{day}T#{hour}:#{minute}:#{second}.#{milli}Z\""
+
   jqstore = $.store
   jqstore.initialize()
 ) jQuery
