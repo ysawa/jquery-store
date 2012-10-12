@@ -30,12 +30,12 @@
           localStorage.setItem(test_key, 'valid')
           value = localStorage.getItem(test_key)
           if value and value == 'valid'
-            # localStorage is valid
+            # localStorage is available
             @storage_valid = true
         if @storage_valid
           @storage = localStorage
         else
-          # if localStorage is invalid, use just a hash
+          # if localStorage is NOT available, use just a hash
           @storage = {}
         if window.JSON and window.JSON.stringify
           @json_object = window.JSON
