@@ -38,16 +38,13 @@
         },
         initialize: function() {
           var test_key, value;
-          if (typeof localStorage === 'undefined') {
-            this.storage_valid = false;
-          } else {
+          this.storage_valid = false;
+          if (typeof localStorage !== 'undefined') {
             test_key = 'jqstore__test';
             localStorage.setItem(test_key, 'valid');
             value = localStorage.getItem(test_key);
             if (value && value === 'valid') {
               this.storage_valid = true;
-            } else {
-              this.storage_valid = false;
             }
           }
           if (this.storage_valid) {

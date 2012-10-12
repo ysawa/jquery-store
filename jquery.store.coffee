@@ -33,19 +33,14 @@
           wrap = $.parseJSON(wrap_string)
           wrap[0]
       initialize: ->
-        if typeof localStorage == 'undefined'
-          # localStorage is invalid
-          @storage_valid = false
-        else
+        @storage_valid = false
+        unless typeof localStorage == 'undefined'
           test_key = 'jqstore__test'
           localStorage.setItem(test_key, 'valid')
           value = localStorage.getItem(test_key)
           if value and value == 'valid'
             # localStorage is valid
             @storage_valid = true
-          else
-            # localStorage is invalid
-            @storage_valid = false
         if @storage_valid
           # if localStorage is invalid, use just a hash
           @storage = localStorage
