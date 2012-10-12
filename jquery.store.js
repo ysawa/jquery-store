@@ -151,9 +151,10 @@
               return "{}";
             case "function":
               return void 0;
-            case "undefined":
             case "null":
               return "null";
+            case "undefined":
+              return void 0;
           }
           return data;
         }

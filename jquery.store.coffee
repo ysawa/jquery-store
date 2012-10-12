@@ -114,8 +114,10 @@
             return "{}"
           when "function"
             return undefined
-          when "undefined", "null"
+          when "null"
             return "null"
+          when "undefined"
+            return undefined
         data
   jqstore = $.store
   jqstore.initialize()
