@@ -92,7 +92,7 @@
             string = []
             $.each data, (key, value) ->
               json = that.stringify_json(value)
-              string.push that.stringify_json(key) + ":" + json if json
+              string.push that.stringify_json(key) + ":" + json if typeof json == 'undefined'
             return "{" + string + "}"
           when "number", "boolean"
             return "" + data
