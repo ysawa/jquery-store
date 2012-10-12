@@ -100,12 +100,10 @@
             return that.stringify_json_date(data)
           when "regexp"
             return "{}"
-          when "function"
+          when "function", "undefined"
             return undefined
           when "null"
             return "null"
-          when "undefined"
-            return undefined
         data
       stringify_json_date: (data) ->
         year = data.getUTCFullYear()

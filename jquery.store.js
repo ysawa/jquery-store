@@ -128,11 +128,10 @@
             case "regexp":
               return "{}";
             case "function":
+            case "undefined":
               return void 0;
             case "null":
               return "null";
-            case "undefined":
-              return void 0;
           }
           return data;
         },
