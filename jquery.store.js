@@ -50,18 +50,18 @@
         },
         json_object: null,
         json_special_characters: {
-          "\b": "\\b",
-          "\t": "\\t",
-          "\n": "\\n",
-          "\f": "\\f",
-          "\r": "\\r",
-          "\"": "\\\"",
-          "\\": "\\\\"
+          '\b': '\\b',
+          '\t': '\\t',
+          '\n': '\\n',
+          '\f': '\\f',
+          '\r': '\\r',
+          '"': '\\"',
+          '\\': '\\\\'
         },
         json_escape_character: function(character) {
           var that;
           that = jqstore;
-          return that.json_special_characters[character] || "\\u" + ('0000' + character.charCodeAt(0).toString(16)).slice(-4);
+          return that.json_special_characters[character] || '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4);
         },
         parse_json: function(string) {
           return $.parseJSON(string);

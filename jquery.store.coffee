@@ -43,17 +43,17 @@
           @json_object = null
       json_object: null
       json_special_characters:
-        "\b": "\\b"
-        "\t": "\\t"
-        "\n": "\\n"
-        "\f": "\\f"
-        "\r": "\\r"
-        "\"": "\\\""
-        "\\": "\\\\"
+        '\b': '\\b'
+        '\t': '\\t'
+        '\n': '\\n'
+        '\f': '\\f'
+        '\r': '\\r'
+        '"': '\\"'
+        '\\': '\\\\'
       json_escape_character: (character) ->
         that = jqstore
         that.json_special_characters[character] or
-          "\\u" + ('0000' + character.charCodeAt(0).toString(16)).slice(-4)
+          '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4)
       parse_json: (string) ->
         $.parseJSON(string)
       prefix: 'jqstore_'
