@@ -26,7 +26,6 @@
         else
           wrap = JSON.parse(wrap_string)
           wrap[0]
-        end
       initialize: ->
         if typeof localStorage == 'undefined'
           # localStorage is invalid

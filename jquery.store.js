@@ -17,13 +17,11 @@
             wrap_string = this.storage[key];
           }
           if (typeof wrap_string === 'undefined' || wrap_string === null) {
-            wrap_string;
-
+            return wrap_string;
           } else {
             wrap = JSON.parse(wrap_string);
-            wrap[0];
+            return wrap[0];
           }
-          return end;
         },
         initialize: function() {
           var test_key, value;
