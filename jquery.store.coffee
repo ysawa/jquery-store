@@ -9,7 +9,7 @@
 # <![endif]-->
 
 (($) ->
-  $.fn.extend
+  $.extend
     store:
       generate_key: (key) ->
         "#{@prefix}#{key}"

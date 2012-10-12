@@ -1,7 +1,7 @@
 (function() {
 
   (function($) {
-    $.fn.extend({
+    $.extend({
       store: {
         generate_key: function(key) {
           return "" + this.prefix + key;
