@@ -20,20 +20,19 @@
           return "" + this.prefix + key;
         },
         get: function(key) {
-          var wrap, wrap_string;
+          var value_string;
           key = this.generate_key(key);
-          wrap_string;
+          value_string;
 
           if (this.storage_valid) {
-            wrap_string = this.storage.getItem(key);
+            value_string = this.storage.getItem(key);
           } else {
-            wrap_string = this.storage[key];
+            value_string = this.storage[key];
           }
-          if (typeof wrap_string === 'undefined' || wrap_string === null) {
-            return wrap_string;
+          if (typeof value_string === 'undefined' || value_string === null) {
+            return value_string;
           } else {
-            wrap = $.parseJSON(wrap_string);
-            return wrap[0];
+            return $.parseJSON(value_string);
           }
         },
         initialize: function() {
@@ -70,14 +69,13 @@
           }
         },
         set: function(key, value) {
-          var wrap, wrap_string;
-          wrap = [value];
-          wrap_string = $.stringifyJSON(wrap);
+          var value_string;
+          value_string = $.stringifyJSON(value);
           key = this.generate_key(key);
           if (this.storage_valid) {
-            return this.storage.setItem(key, wrap_string);
+            return this.storage.setItem(key, value_string);
           } else {
-            return this.storage[key] = wrap_string;
+            return this.storage[key] = value_string;
           }
         },
         storage: {},
@@ -109,6 +107,8 @@
           case "undefined":
           case "null":
             return "null";
+          case "date":
+            return "" + data.getTime();
         }
         return data;
       }

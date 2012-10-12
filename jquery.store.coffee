@@ -21,17 +21,16 @@
         "#{@prefix}#{key}"
       get: (key) ->
         key = @generate_key(key)
-        wrap_string
+        value_string
         if @storage_valid
-          wrap_string = @storage.getItem(key)
+          value_string = @storage.getItem(key)
         else
-          wrap_string = @storage[key]
+          value_string = @storage[key]
 
-        if typeof wrap_string == 'undefined' or wrap_string == null
-          wrap_string
+        if typeof value_string == 'undefined' or value_string == null
+          value_string
         else
-          wrap = $.parseJSON(wrap_string)
-          wrap[0]
+          $.parseJSON(value_string)
       initialize: ->
         @storage_valid = false
         unless typeof localStorage == 'undefined'
@@ -59,13 +58,12 @@
         else
           @storage = {}
       set: (key, value) ->
-        wrap = [value]
-        wrap_string = $.stringifyJSON(wrap)
+        value_string = $.stringifyJSON(value)
         key = @generate_key(key)
         if @storage_valid
-          @storage.setItem(key, wrap_string)
+          @storage.setItem(key, value_string)
         else
-          @storage[key] = wrap_string
+          @storage[key] = value_string
       storage: {}
       storage_valid: false
     stringifyJSON: (data) ->
@@ -85,6 +83,8 @@
           return "" + data
         when "undefined", "null"
           return "null"
+        when "date"
+          # TODO use ISO's date format and wrap it with double quotes
       data
 
   $.store.initialize()
