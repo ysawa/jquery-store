@@ -1,6 +1,19 @@
 (function() {
 
   (function($) {
+    var escape_char, special_chars;
+    special_chars = {
+      "\b": "\\b",
+      "\t": "\\t",
+      "\n": "\\n",
+      "\f": "\\f",
+      "\r": "\\r",
+      "\"": "\\\"",
+      "\\": "\\\\"
+    };
+    escape_char = function(char) {
+      return special_chars[char] || "\\u" + ("0000" + chr.charCodeAt(0).toString(16)).slice(-4);
+    };
     $.extend({
       store: {
         generate_key: function(key) {
@@ -19,7 +32,7 @@
           if (typeof wrap_string === 'undefined' || wrap_string === null) {
             return wrap_string;
           } else {
-            wrap = JSON.parse(wrap_string);
+            wrap = $.parseJSON(wrap_string);
             return wrap[0];
           }
         },
@@ -62,7 +75,7 @@
         set: function(key, value) {
           var wrap, wrap_string;
           wrap = [value];
-          wrap_string = JSON.stringify(wrap);
+          wrap_string = $.stringifyJSON(wrap);
           key = this.generate_key(key);
           if (this.storage_valid) {
             return this.storage.setItem(key, wrap_string);
@@ -72,6 +85,35 @@
         },
         storage: {},
         storage_valid: false
+      },
+      stringifyJSON: function(data) {
+        var string;
+        if (window.JSON && window.JSON.stringify) {
+          return window.JSON.stringify(data);
+        }
+        switch ($.type(data)) {
+          case "string":
+            return "\"" + data.replace(/[\x00-\x1f\\"]/g, escape_char) + "\"";
+          case "array":
+            return "[" + $.map(data, $.stringifyJSON) + "]";
+          case "object":
+            string = [];
+            $.each(data, function(key, value) {
+              var json;
+              json = $.stringifyJSON(value);
+              if (json) {
+                return string.push($.stringifyJSON(key) + ":" + json);
+              }
+            });
+            return "{" + string + "}";
+          case "number":
+          case "boolean":
+            return "" + data;
+          case "undefined":
+          case "null":
+            return "null";
+        }
+        return data;
       }
     });
     return $.store.initialize();

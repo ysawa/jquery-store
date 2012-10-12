@@ -1,14 +1,20 @@
 # jQuery Store
 #
 # jQuery Store can store almost all type of objects.
-#
-# In the codes, JSON.parse and JSON.stringify used.
-# I recommend to insert this code in your html:
-# <!--[if lt IE 8]>
-# <script src="./JSON-js/json2.js"></script>
-# <![endif]-->
 
 (($) ->
+  special_chars =
+    "\b": "\\b"
+    "\t": "\\t"
+    "\n": "\\n"
+    "\f": "\\f"
+    "\r": "\\r"
+    "\"": "\\\""
+    "\\": "\\\\"
+
+  escape_char = (char) ->
+    special_chars[char] or "\\u" + ("0000" + chr.charCodeAt(0).toString(16)).slice(-4)
+
   $.extend
     store:
       generate_key: (key) ->
@@ -24,7 +30,7 @@
         if typeof wrap_string == 'undefined' or wrap_string == null
           wrap_string
         else
-          wrap = JSON.parse(wrap_string)
+          wrap = $.parseJSON(wrap_string)
           wrap[0]
       initialize: ->
         if typeof localStorage == 'undefined'
@@ -59,7 +65,7 @@
           @storage = {}
       set: (key, value) ->
         wrap = [value]
-        wrap_string = JSON.stringify(wrap)
+        wrap_string = $.stringifyJSON(wrap)
         key = @generate_key(key)
         if @storage_valid
           @storage.setItem(key, wrap_string)
@@ -67,5 +73,24 @@
           @storage[key] = wrap_string
       storage: {}
       storage_valid: false
+    stringifyJSON: (data) ->
+      return window.JSON.stringify(data) if window.JSON and window.JSON.stringify
+      switch $.type(data)
+        when "string"
+          return "\"" + data.replace(/[\x00-\x1f\\"]/g, escape_char) + "\""
+        when "array"
+          return "[" + $.map(data, $.stringifyJSON) + "]"
+        when "object"
+          string = []
+          $.each data, (key, value) ->
+            json = $.stringifyJSON(value)
+            string.push $.stringifyJSON(key) + ":" + json if json
+          return "{" + string + "}"
+        when "number", "boolean"
+          return "" + data
+        when "undefined", "null"
+          return "null"
+      data
+
   $.store.initialize()
 ) jQuery
