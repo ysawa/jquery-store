@@ -147,6 +147,8 @@
                 second = "0" + second;
               }
               return "\"" + year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + "." + milli + "Z\"";
+            case "regexp":
+              return "{}";
             case "function":
               return void 0;
             case "undefined":

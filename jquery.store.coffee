@@ -4,6 +4,7 @@
 
 (($) ->
   $.extend
+    # jqstore = $.store below
     store:
       generate_key: (key) ->
         "#{@prefix}#{key}"
@@ -109,6 +110,8 @@
             minute = "0" + minute if minute < 10
             second = "0" + second if second < 10
             return "\"#{year}-#{month}-#{day}T#{hour}:#{minute}:#{second}.#{milli}Z\""
+          when "regexp"
+            return "{}"
           when "function"
             return undefined
           when "undefined", "null"
