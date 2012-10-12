@@ -1,7 +1,7 @@
 (function() {
 
   (function($) {
-    var escape_char, special_chars;
+    var JSON, escape_char, special_chars;
     special_chars = {
       "\b": "\\b",
       "\t": "\\t",
@@ -14,6 +14,11 @@
     escape_char = function(char) {
       return special_chars[char] || "\\u" + ("0000" + chr.charCodeAt(0).toString(16)).slice(-4);
     };
+    if (window.JSON && window.JSON.stringify) {
+      JSON = window.JSON;
+    } else {
+      JSON = null;
+    }
     $.extend({
       store: {
         generate_key: function(key) {
@@ -82,9 +87,9 @@
         storage_valid: false
       },
       stringifyJSON: function(data) {
-        var string;
-        if (window.JSON && window.JSON.stringify) {
-          return window.JSON.stringify(data);
+        var day, hour, milli, minute, month, second, string, year;
+        if (JSON) {
+          return JSON.stringify(data);
         }
         switch ($.type(data)) {
           case "string":
@@ -104,11 +109,33 @@
           case "number":
           case "boolean":
             return "" + data;
+          case "date":
+            year = data.getUTCFullYear();
+            month = data.getUTCMonth() + 1;
+            day = data.getUTCDate();
+            hour = data.getUTCHours();
+            minute = data.getUTCMinutes();
+            second = data.getUTCSeconds();
+            milli = data.getUTCMilliseconds();
+            if (month < 10) {
+              month = "0" + month;
+            }
+            if (day < 10) {
+              day = "0" + day;
+            }
+            if (hour < 10) {
+              hour = "0" + hour;
+            }
+            if (minute < 10) {
+              minute = "0" + minute;
+            }
+            if (second < 10) {
+              second = "0" + second;
+            }
+            return "\"" + year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + "." + milli + "Z\"";
           case "undefined":
           case "null":
             return "null";
-          case "date":
-            return "" + data.getTime();
         }
         return data;
       }

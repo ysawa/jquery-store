@@ -11,9 +11,12 @@
     "\r": "\\r"
     "\"": "\\\""
     "\\": "\\\\"
-
   escape_char = (char) ->
     special_chars[char] or "\\u" + ("0000" + chr.charCodeAt(0).toString(16)).slice(-4)
+  if window.JSON and window.JSON.stringify
+    JSON = window.JSON
+  else
+    JSON = null
 
   $.extend
     store:
@@ -67,7 +70,7 @@
       storage: {}
       storage_valid: false
     stringifyJSON: (data) ->
-      return window.JSON.stringify(data) if window.JSON and window.JSON.stringify
+      return JSON.stringify(data) if JSON
       switch $.type(data)
         when "string"
           return "\"" + data.replace(/[\x00-\x1f\\"]/g, escape_char) + "\""
@@ -81,10 +84,22 @@
           return "{" + string + "}"
         when "number", "boolean"
           return "" + data
+        when "date"
+          year = data.getUTCFullYear()
+          month = data.getUTCMonth() + 1
+          day = data.getUTCDate()
+          hour = data.getUTCHours()
+          minute = data.getUTCMinutes()
+          second = data.getUTCSeconds()
+          milli = data.getUTCMilliseconds()
+          month = "0" + month if month < 10
+          day = "0" + day if day < 10
+          hour = "0" + hour if hour < 10
+          minute = "0" + minute if minute < 10
+          second = "0" + second if second < 10
+          return "\"#{year}-#{month}-#{day}T#{hour}:#{minute}:#{second}.#{milli}Z\""
         when "undefined", "null"
           return "null"
-        when "date"
-          # TODO use ISO's date format and wrap it with double quotes
       data
 
   $.store.initialize()
