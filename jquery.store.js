@@ -40,9 +40,9 @@
             }
           }
           if (this.storage_valid) {
-            return this.storage = {};
-          } else {
             return this.storage = localStorage;
+          } else {
+            return this.storage = {};
           }
         },
         prefix: 'jqstore_',

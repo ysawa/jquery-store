@@ -43,9 +43,9 @@
             @storage_valid = false
         if @storage_valid
           # if localStorage is invalid, use just a hash
-          @storage = {}
-        else
           @storage = localStorage
+        else
+          @storage = {}
       prefix: 'jqstore_'
       remove: (key) ->
         key = @generate_key(key)
