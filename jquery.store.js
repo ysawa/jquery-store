@@ -115,7 +115,7 @@
               $.each(data, function(key, value) {
                 var key_json, value_json;
                 value_json = that.stringify_json(value);
-                if (typeof value_json === 'undefined') {
+                if (typeof value_json !== 'undefined') {
                   key_json = that.stringify_json(key);
                   return string.push("" + key_json + ":" + value_json);
                 }

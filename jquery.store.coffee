@@ -90,7 +90,7 @@
             string = []
             $.each data, (key, value) ->
               value_json = that.stringify_json(value)
-              if typeof value_json == 'undefined'
+              unless typeof value_json == 'undefined'
                 key_json = that.stringify_json(key)
                 string.push "#{key_json}:#{value_json}"
             return '{' + string + '}'
