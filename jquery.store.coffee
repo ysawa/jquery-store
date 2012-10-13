@@ -1,6 +1,4 @@
-# jqStore
-#
-# jqStore can store almost all type of objects.
+# jQuery Store
 
 (($) ->
   $.extend
