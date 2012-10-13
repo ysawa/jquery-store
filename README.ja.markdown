@@ -27,7 +27,7 @@ The data of date is converted to the one of ISO 8601 Time format.
 
 ## Usage
 
-You can use this plugin if you only include jQuery(1.4.1 or above) and jquery.store.min.js .
+jQuery(1.4.1以上) と jquery.store.min.js を読み込めばすぐに使えます。
 
     // load an object from storage
     var value = $.store.get('key');
@@ -49,4 +49,4 @@ If you use a browser incompatible with localStorage, jQuery Store use only a has
 
 ## Copyright
 
-Copyright (c) 2012 Yoshihiro Sawa. See LICENSE.txt for further details.
+Copyright (c) 2012 Yoshihiro Sawa. 詳細は LICENSE.txt をお読みください。
