@@ -54,7 +54,7 @@
           '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4)
       parse_json: (string) ->
         $.parseJSON(string)
-      prefix: 'jqstore_'
+      prefix: 'js_'
       remove: (key) ->
         that = jqstore
         key = that.generate_key(key)

@@ -66,7 +66,7 @@
         parse_json: function(string) {
           return $.parseJSON(string);
         },
-        prefix: 'jqstore_',
+        prefix: 'js_',
         remove: function(key) {
           var that;
           that = jqstore;
