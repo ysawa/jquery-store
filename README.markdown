@@ -3,13 +3,13 @@
 jQuery Store is a light-weight plugin to save and load objects safely. The plugin convert almost all types of objects into JSON strings and save them in localStorage.
 
 
-## Compatibility
+## Features
 
-### Storage
+### Safe
 
-If you have a browser incompatible with localStorage, jQuery Store use only a hash as a storage. Thus, if you reload your browser, all data saved will be removed. (The plugin is not compatible with userData for IE6/7 as other storage plugins.)
+If you use a browser imcompatible with localStorage, some operations around localStorage must raise errors. However, this plugin prevents those errors. You can use localStorage safely without being frastrated.
 
-### Types
+### Compatible With Many Types
 
 * string
 * array
@@ -30,16 +30,21 @@ The data of date is converted to the one of ISO 8601 Time format.
 You can use this plugin if you only include jQuery(1.4.1 or above) and jquery.store.min.js .
 
     // load an object from storage
-    $.store.get('key')
+    var value = $.store.get('key');
 
     // save an object into storage
-    $.store.set('key', 'value')
+    $.store.set('key', 'value');
 
     // remove an object from storage
-    $.store.remove('key')
+    $.store.remove('key');
 
     // remove all object from storage
-    $.store.remove_all()
+    $.store.remove_all();
+
+
+## Further Information
+
+If you use a browser incompatible with localStorage, jQuery Store use only a hash as a storage. Thus, if you reload your browser, all data saved will be removed. (The plugin is not compatible with userData for IE6/7 as other storage plugins.)
 
 
 ## Copyright
