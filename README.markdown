@@ -27,6 +27,8 @@ The data of date is converted to the one of ISO 8601 Time format.
 
 ## Usage
 
+You can use this plugin only if you include jQuery(1.4.1 or above) and jquery.store.min.js .
+
     // load an object from storage
     $.store.get('key')
 
