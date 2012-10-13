@@ -23,10 +23,18 @@ The data of date is converted to the one of ISO 8601 Time format.
 
 ## Usage
 
+    // load an object from storage
     $.store.get('key')
 
+    // save an object into storage
     $.store.set('key', 'value')
 
+    // remove an object from storage
     $.store.remove('key')
 
+    // remove all object from storage
     $.store.remove_all()
+
+## Copyright
+
+Copyright (c) 2012 Yoshihiro Sawa. See LICENSE.txt for further details.
