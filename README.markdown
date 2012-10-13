@@ -1,6 +1,8 @@
 # jQuery Store
 
-jQuery Store can save and load almost all type of objects. The plugin convert objects into JSON strings and save them in localStorage.
+jQuery Store is a light-weight plugin to save and load objects safely. The plugin convert almost all types of objects into JSON strings and save them in localStorage.
+
+If you have a browser incompatible with localStorage, jQuery Store use only a hash as a storage. Thus, if you reload your browser, all data saved will be removed. (The plugin is not compatible with userData for IE6/7 as other storage plugins.)
 
 
 ## Compatibility
