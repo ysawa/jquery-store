@@ -22,3 +22,5 @@ tmp/
 
 pkg
 .rvmrc
+
+guard-process

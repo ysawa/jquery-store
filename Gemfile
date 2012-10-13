@@ -1,5 +1,12 @@
+source 'https://rubygems.org'
+
 gem 'guard-coffeescript'
 gem 'rb-fsevent', require: false if RUBY_PLATFORM =~ /darwin/i # mac os x
+# gem 'sprockets'
+# gem 'guard-sprockets', :git => "git://github.com/jondot/guard-sprockets.git"
+gem 'uglifier'
+gem 'guard-uglify'
+gem 'guard-process'
 
 # Notifiers
 case RUBY_PLATFORM
