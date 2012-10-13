@@ -2,6 +2,7 @@
 
 jQuery Store can save and load almost all type of objects. The plugin convert objects into JSON strings and save them in localStorage.
 
+
 ## Compatibility
 
 ### Types
