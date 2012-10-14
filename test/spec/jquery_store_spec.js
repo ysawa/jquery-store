@@ -2,8 +2,8 @@
 
   describe('$.store', function() {
     beforeEach(function() {
-      if (window.localStore) {
-        window.localStore.clear();
+      if (window.localStorage) {
+        window.localStorage.clear();
       }
       return $.store.initialize();
     });

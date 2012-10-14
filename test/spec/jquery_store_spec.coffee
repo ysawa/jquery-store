@@ -1,7 +1,7 @@
 describe '$.store', ->
   beforeEach ->
-    if window.localStore
-      window.localStore.clear()
+    if window.localStorage
+      window.localStorage.clear()
     $.store.initialize()
 
   describe 'with localStorage and JSON', ->
