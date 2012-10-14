@@ -1,6 +1,6 @@
 # jQuery Store
 
-jQuery Store は安全にオブジェクトを保存したりロードするための軽量プラグインです。オブジェクトはJSONの文字列に変換され localStorage に保存されます。
+jQuery Store は安全にオブジェクトを保存したり読み込むための軽量プラグインです。オブジェクトはJSONの文字列に変換され localStorage に保存されます。
 
 
 ## Features
@@ -29,16 +29,16 @@ The data of date is converted to the one of ISO 8601 Time format.
 
 jQuery(1.4.1以上) と jquery.store.min.js を読み込めばすぐに使えます。
 
-    // load an object from storage
+    // ストレージからオブジェクトを読み込む
     var value = $.store.get('key');
 
-    // save an object into storage
+    // ストレージにオブジェクトを保存する
     $.store.set('key', 'value');
 
-    // remove an object from storage
+    // ストレージからオブジェクトを消去する
     $.store.remove('key');
 
-    // remove all object from storage
+    // ストレージから全てのオブジェクトを消去する
     $.store.remove_all();
 
 
