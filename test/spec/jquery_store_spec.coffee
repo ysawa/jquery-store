@@ -7,7 +7,7 @@ describe '$.store', ->
   describe 'with localStorage and JSON', ->
     describe '.storage', ->
       it 'should be window.localStorage', ->
-        expect($.store.storage).toEqual window.localStorage
+        expect($.store.storage_valid).toEqual true
 
     describe '.json_object', ->
       it 'should be window.JSON', ->
@@ -73,7 +73,7 @@ describe '$.store', ->
 
     describe '.storage', ->
       it 'should be window.localStorage', ->
-        expect($.store.storage).toEqual window.localStorage
+        expect($.store.storage_valid).toEqual true
 
     describe '.json_object', ->
       it 'should not be window.JSON', ->

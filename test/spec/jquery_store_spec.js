@@ -10,7 +10,7 @@
     describe('with localStorage and JSON', function() {
       describe('.storage', function() {
         return it('should be window.localStorage', function() {
-          return expect($.store.storage).toEqual(window.localStorage);
+          return expect($.store.storage_valid).toEqual(true);
         });
       });
       describe('.json_object', function() {
@@ -91,7 +91,7 @@
       });
       describe('.storage', function() {
         return it('should be window.localStorage', function() {
-          return expect($.store.storage).toEqual(window.localStorage);
+          return expect($.store.storage_valid).toEqual(true);
         });
       });
       describe('.json_object', function() {
