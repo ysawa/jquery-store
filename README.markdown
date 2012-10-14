@@ -1,6 +1,6 @@
 # jQuery Store
 
-jQuery Store is a light-weight plugin to save and load objects safely. The plugin convert almost all types of objects into JSON strings and save them in localStorage. [[日本語](https://github.com/ysawa/jquery-store/blob/master/README.ja.markdown)]
+jQuery Store is a light-weight plugin to save and load objects safely. The plugin convert almost all types of objects into JSON strings and save them in localStorage or userData. [[日本語](https://github.com/ysawa/jquery-store/blob/master/README.ja.markdown)]
 
 
 ## Features

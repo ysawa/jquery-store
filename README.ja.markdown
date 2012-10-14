@@ -1,6 +1,6 @@
 # jQuery Store
 
-jQuery Store は安全にオブジェクトを保存したり読み込むための軽量プラグインです。オブジェクトはJSONの文字列に変換され localStorage に保存されます。
+jQuery Store は安全にオブジェクトを保存したり読み込むための軽量プラグインです。オブジェクトはJSONの文字列に変換され localStorage または userData に保存されます。
 
 
 ## 特徴
