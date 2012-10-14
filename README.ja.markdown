@@ -7,7 +7,7 @@ jQuery Store は安全にオブジェクトを保存したり読み込むため�
 
 ### Safe
 
-If you use a browser imcompatible with localStorage, some operations around localStorage must raise errors. However, this plugin prevents those errors and stopping other important programs. You can use localStorage safely without being frustrated.
+localStorage に対応していないブラウザの場合、 localStorage の操作はエラーを発生させることがあります。しかし、このプラグインを使うことで、これらのエラーの発生や他の大事なプログラムを止めてしまうことが防げます。localStorage を安全にイライラすることなく使うことができます。
 
 ### Compatible With Many Types
 
@@ -18,7 +18,7 @@ If you use a browser imcompatible with localStorage, some operations around loca
 * boolean
 * null
 
-date, function, and undefined are not compatible well.
+date, regexp, function, and undefined are not compatible well.
 
 The data of date is converted to the one of ISO 8601 Time format.
 
@@ -44,7 +44,7 @@ jQuery(1.4.1以上) と jquery.store.min.js を読み込めばすぐに使えま
 
 ## Environments
 
-The plugin is tested with Jasmine(1.2.0) and those browsers below passed all specs:
+Jasmine(1.2.0) を使ってテストをしています。以下の環境で全てのテストが通ることを確認しました。
 
 * Safari 6.0 (7536.25) (Mac OS X 10.7.4)
 * Google Chrome 22.0.1229.94 (Mac OS X 10.7.4)
@@ -59,7 +59,7 @@ The plugin is tested with Jasmine(1.2.0) and those browsers below passed all spe
 
 ## Further Information
 
-If you use a browser incompatible with localStorage, jQuery Store use only a hash as a storage. Thus, if you reload your browser, all data saved will be removed. (The plugin is not compatible with userData for IE6/7 as other storage plugins.)
+localStorage に対応していないブラウザの場合、jQuery Store は連想配列(hash)をストレージとして使用します。ゆえに、ブラウザをリロードすると全てのデータは失われます。(このプラグインは他のストレージ系プラグインの様に userData を使用して IE6/7 に対応することはしていません。)
 
 
 ## Copyright
