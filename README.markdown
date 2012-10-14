@@ -49,10 +49,11 @@ The plugin is tested with Jasmine(1.2.0) and those browsers below passed all spe
 * Safari 6.0 (7536.25) (Mac OS X 10.7.4)
 * Google Chrome 22.0.1229.94 (Mac OS X 10.7.4)
 * Firefox 8.0.1 (Mac OS X 10.7.4)
+* Opera 12.02 (Mac OS X 10.7.4)
 * IE 8.0.6001.18702 (Windows XP Service Pack 3)
 * Google Chrome 21.0.1180.89 (Windows XP Service Pack 3)
 * Firefox 7.0.1 (Windows XP Service Pack 3)
-* Opera 11.52 (Windows XP Service Pack 3)
+* Opera 12.02 (Windows XP Service Pack 3)
 
 
 ## Further Information
