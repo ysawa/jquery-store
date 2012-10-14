@@ -59,11 +59,11 @@
       return describe('can save but cannot load expected', function() {
         it('date', function() {
           $.store.set('key', new Date(2012, 11, 31, 23, 9, 59));
-          expect($.store.get('key')).toEqual('2012-12-31T14:09:59.000Z');
+          expect($.store.get('key')).toMatch(/^2012-12-31T14:09:59(|.000)Z$/);
           $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 67));
-          expect($.store.get('key')).toEqual('1999-02-01T18:04:05.067Z');
+          expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.067)Z$/);
           $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 678));
-          return expect($.store.get('key')).toEqual('1999-02-01T18:04:05.678Z');
+          return expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.678)Z$/);
         });
         it('function', function() {
           $.store.set('key', function() {});
@@ -140,11 +140,11 @@
       return describe('can save but cannot load expected', function() {
         it('date', function() {
           $.store.set('key', new Date(2012, 11, 31, 23, 9, 59));
-          expect($.store.get('key')).toEqual('2012-12-31T14:09:59.000Z');
+          expect($.store.get('key')).toMatch(/^2012-12-31T14:09:59(|.000)Z$/);
           $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 67));
-          expect($.store.get('key')).toEqual('1999-02-01T18:04:05.067Z');
+          expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.067)Z$/);
           $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 678));
-          return expect($.store.get('key')).toEqual('1999-02-01T18:04:05.678Z');
+          return expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.678)Z$/);
         });
         it('function', function() {
           $.store.set('key', function() {});
@@ -222,11 +222,11 @@
       return describe('can save but cannot load expected', function() {
         it('date', function() {
           $.store.set('key', new Date(2012, 11, 31, 23, 9, 59));
-          expect($.store.get('key')).toEqual('2012-12-31T14:09:59.000Z');
+          expect($.store.get('key')).toMatch(/^2012-12-31T14:09:59(|.000)Z$/);
           $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 67));
-          expect($.store.get('key')).toEqual('1999-02-01T18:04:05.067Z');
+          expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.067)Z$/);
           $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 678));
-          return expect($.store.get('key')).toEqual('1999-02-01T18:04:05.678Z');
+          return expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.678)Z$/);
         });
         it('function', function() {
           $.store.set('key', function() {});
@@ -305,11 +305,11 @@
       return describe('can save but cannot load expected', function() {
         it('date', function() {
           $.store.set('key', new Date(2012, 11, 31, 23, 9, 59));
-          expect($.store.get('key')).toEqual('2012-12-31T14:09:59.000Z');
+          expect($.store.get('key')).toMatch(/^2012-12-31T14:09:59(|.000)Z$/);
           $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 67));
-          expect($.store.get('key')).toEqual('1999-02-01T18:04:05.067Z');
+          expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.067)Z$/);
           $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 678));
-          return expect($.store.get('key')).toEqual('1999-02-01T18:04:05.678Z');
+          return expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.678)Z$/);
         });
         it('function', function() {
           $.store.set('key', function() {});
