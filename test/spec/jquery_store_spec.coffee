@@ -73,6 +73,13 @@ describe '$.store', ->
         $.store.set('key', [undefined])
         expect($.store.get('key')).toEqual [null]
 
+    describe '.remove', ->
+      it 'can remove saved object', ->
+        $.store.set('key', 'value')
+        expect($.store.get('key')).toEqual 'value'
+        $.store.remove('key')
+        expect($.store.get('key')).toEqual undefined
+
   describe 'with localStorage and without JSON', ->
     beforeEach ->
       $.store.json_object = null
@@ -144,6 +151,13 @@ describe '$.store', ->
         expect($.store.get('key')).toEqual undefined
         $.store.set('key', [undefined])
         expect($.store.get('key')).toEqual [null]
+
+    describe '.remove', ->
+      it 'can remove saved object', ->
+        $.store.set('key', 'value')
+        expect($.store.get('key')).toEqual 'value'
+        $.store.remove('key')
+        expect($.store.get('key')).toEqual undefined
 
   describe 'without localStorage and with JSON', ->
     beforeEach ->
@@ -218,6 +232,13 @@ describe '$.store', ->
         $.store.set('key', [undefined])
         expect($.store.get('key')).toEqual [null]
 
+    describe '.remove', ->
+      it 'can remove saved object', ->
+        $.store.set('key', 'value')
+        expect($.store.get('key')).toEqual 'value'
+        $.store.remove('key')
+        expect($.store.get('key')).toEqual undefined
+
   describe 'without localStorage and without JSON', ->
     beforeEach ->
       $.store.storage = {}
@@ -291,3 +312,10 @@ describe '$.store', ->
         expect($.store.get('key')).toEqual undefined
         $.store.set('key', [undefined])
         expect($.store.get('key')).toEqual [null]
+
+    describe '.remove', ->
+      it 'can remove saved object', ->
+        $.store.set('key', 'value')
+        expect($.store.get('key')).toEqual 'value'
+        $.store.remove('key')
+        expect($.store.get('key')).toEqual undefined

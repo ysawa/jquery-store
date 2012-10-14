@@ -56,7 +56,7 @@
           });
         });
       });
-      return describe('can save but cannot load expected', function() {
+      describe('can save but cannot load expected', function() {
         it('date', function() {
           $.store.set('key', new Date(2012, 11, 31, 23, 9, 59));
           expect($.store.get('key')).toMatch(/^2012-12-31T14:09:59(|.000)Z$/);
@@ -88,6 +88,14 @@
           expect($.store.get('key')).toEqual(void 0);
           $.store.set('key', [void 0]);
           return expect($.store.get('key')).toEqual([null]);
+        });
+      });
+      return describe('.remove', function() {
+        return it('can remove saved object', function() {
+          $.store.set('key', 'value');
+          expect($.store.get('key')).toEqual('value');
+          $.store.remove('key');
+          return expect($.store.get('key')).toEqual(void 0);
         });
       });
     });
@@ -143,7 +151,7 @@
           });
         });
       });
-      return describe('can save but cannot load expected', function() {
+      describe('can save but cannot load expected', function() {
         it('date', function() {
           $.store.set('key', new Date(2012, 11, 31, 23, 9, 59));
           expect($.store.get('key')).toMatch(/^2012-12-31T14:09:59(|.000)Z$/);
@@ -175,6 +183,14 @@
           expect($.store.get('key')).toEqual(void 0);
           $.store.set('key', [void 0]);
           return expect($.store.get('key')).toEqual([null]);
+        });
+      });
+      return describe('.remove', function() {
+        return it('can remove saved object', function() {
+          $.store.set('key', 'value');
+          expect($.store.get('key')).toEqual('value');
+          $.store.remove('key');
+          return expect($.store.get('key')).toEqual(void 0);
         });
       });
     });
@@ -231,7 +247,7 @@
           });
         });
       });
-      return describe('can save but cannot load expected', function() {
+      describe('can save but cannot load expected', function() {
         it('date', function() {
           $.store.set('key', new Date(2012, 11, 31, 23, 9, 59));
           expect($.store.get('key')).toMatch(/^2012-12-31T14:09:59(|.000)Z$/);
@@ -263,6 +279,14 @@
           expect($.store.get('key')).toEqual(void 0);
           $.store.set('key', [void 0]);
           return expect($.store.get('key')).toEqual([null]);
+        });
+      });
+      return describe('.remove', function() {
+        return it('can remove saved object', function() {
+          $.store.set('key', 'value');
+          expect($.store.get('key')).toEqual('value');
+          $.store.remove('key');
+          return expect($.store.get('key')).toEqual(void 0);
         });
       });
     });
@@ -320,7 +344,7 @@
           });
         });
       });
-      return describe('can save but cannot load expected', function() {
+      describe('can save but cannot load expected', function() {
         it('date', function() {
           $.store.set('key', new Date(2012, 11, 31, 23, 9, 59));
           expect($.store.get('key')).toMatch(/^2012-12-31T14:09:59(|.000)Z$/);
@@ -352,6 +376,14 @@
           expect($.store.get('key')).toEqual(void 0);
           $.store.set('key', [void 0]);
           return expect($.store.get('key')).toEqual([null]);
+        });
+      });
+      return describe('.remove', function() {
+        return it('can remove saved object', function() {
+          $.store.set('key', 'value');
+          expect($.store.get('key')).toEqual('value');
+          $.store.remove('key');
+          return expect($.store.get('key')).toEqual(void 0);
         });
       });
     });
