@@ -78,7 +78,7 @@
           that.storage[key] = value_string
       storage: {}
       storage_valid: false
-      stringify_json: (data) ->
+      stringify_json: (data, root) ->
         that = jqstore
         return that.json_object.stringify(data) if that.json_object
         switch $.type(data)
@@ -101,7 +101,10 @@
           when 'regexp'
             return '{}'
           when 'function', 'undefined'
-            return undefined
+            if root
+              return undefined
+            else
+              return 'null'
           when 'null'
             return 'null'
         data

@@ -99,7 +99,7 @@
         },
         storage: {},
         storage_valid: false,
-        stringify_json: function(data) {
+        stringify_json: function(data, root) {
           var string, that;
           that = jqstore;
           if (that.json_object) {
@@ -130,7 +130,12 @@
               return '{}';
             case 'function':
             case 'undefined':
-              return void 0;
+              if (root) {
+                return void 0;
+              } else {
+                return 'null';
+              }
+              break;
             case 'null':
               return 'null';
           }

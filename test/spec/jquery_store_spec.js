@@ -18,7 +18,7 @@
           return expect($.store.json_object).toEqual(window.JSON);
         });
       });
-      return describe('can save and load', function() {
+      describe('can save and load', function() {
         it('string', function() {
           $.store.set('key', 'value');
           return expect($.store.get('key')).toEqual('value');
@@ -54,6 +54,26 @@
             c: true,
             d: 'string'
           });
+        });
+      });
+      return describe('can save but cannot load expected', function() {
+        it('function', function() {
+          $.store.set('key', function() {});
+          expect($.store.get('key')).toEqual(void 0);
+          $.store.set('key', [function() {}]);
+          return expect($.store.get('key')).toEqual([null]);
+        });
+        it('null', function() {
+          $.store.set('key', null);
+          expect($.store.get('key')).toEqual(null);
+          $.store.set('key', [null]);
+          return expect($.store.get('key')).toEqual([null]);
+        });
+        return it('undefined', function() {
+          $.store.set('key', void 0);
+          expect($.store.get('key')).toEqual(void 0);
+          $.store.set('key', [void 0]);
+          return expect($.store.get('key')).toEqual([null]);
         });
       });
     });
@@ -71,7 +91,7 @@
           return expect($.store.json_object).toEqual(null);
         });
       });
-      return describe('can save and load', function() {
+      describe('can save and load', function() {
         it('string', function() {
           $.store.set('key', 'value');
           return expect($.store.get('key')).toEqual('value');
@@ -107,6 +127,26 @@
             c: true,
             d: 'string'
           });
+        });
+      });
+      return describe('can save but cannot load expected', function() {
+        it('function', function() {
+          $.store.set('key', function() {});
+          expect($.store.get('key')).toEqual(void 0);
+          $.store.set('key', [function() {}]);
+          return expect($.store.get('key')).toEqual([null]);
+        });
+        it('null', function() {
+          $.store.set('key', null);
+          expect($.store.get('key')).toEqual(null);
+          $.store.set('key', [null]);
+          return expect($.store.get('key')).toEqual([null]);
+        });
+        return it('undefined', function() {
+          $.store.set('key', void 0);
+          expect($.store.get('key')).toEqual(void 0);
+          $.store.set('key', [void 0]);
+          return expect($.store.get('key')).toEqual([null]);
         });
       });
     });
@@ -125,7 +165,7 @@
           return expect($.store.json_object).toEqual(window.JSON);
         });
       });
-      return describe('can save and load', function() {
+      describe('can save and load', function() {
         it('string', function() {
           $.store.set('key', 'value');
           return expect($.store.get('key')).toEqual('value');
@@ -161,6 +201,26 @@
             c: true,
             d: 'string'
           });
+        });
+      });
+      return describe('can save but cannot load expected', function() {
+        it('function', function() {
+          $.store.set('key', function() {});
+          expect($.store.get('key')).toEqual(void 0);
+          $.store.set('key', [function() {}]);
+          return expect($.store.get('key')).toEqual([null]);
+        });
+        it('null', function() {
+          $.store.set('key', null);
+          expect($.store.get('key')).toEqual(null);
+          $.store.set('key', [null]);
+          return expect($.store.get('key')).toEqual([null]);
+        });
+        return it('undefined', function() {
+          $.store.set('key', void 0);
+          expect($.store.get('key')).toEqual(void 0);
+          $.store.set('key', [void 0]);
+          return expect($.store.get('key')).toEqual([null]);
         });
       });
     });
@@ -180,7 +240,7 @@
           return expect($.store.json_object).toEqual(null);
         });
       });
-      return describe('can save and load', function() {
+      describe('can save and load', function() {
         it('string', function() {
           $.store.set('key', 'value');
           return expect($.store.get('key')).toEqual('value');
@@ -216,6 +276,26 @@
             c: true,
             d: 'string'
           });
+        });
+      });
+      return describe('can save but cannot load expected', function() {
+        it('function', function() {
+          $.store.set('key', function() {});
+          expect($.store.get('key')).toEqual(void 0);
+          $.store.set('key', [function() {}]);
+          return expect($.store.get('key')).toEqual([null]);
+        });
+        it('null', function() {
+          $.store.set('key', null);
+          expect($.store.get('key')).toEqual(null);
+          $.store.set('key', [null]);
+          return expect($.store.get('key')).toEqual([null]);
+        });
+        return it('undefined', function() {
+          $.store.set('key', void 0);
+          expect($.store.get('key')).toEqual(void 0);
+          $.store.set('key', [void 0]);
+          return expect($.store.get('key')).toEqual([null]);
         });
       });
     });

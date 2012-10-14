@@ -40,6 +40,25 @@ describe '$.store', ->
         $.store.set('key', {a:1,b:2,c:true,d:'string'})
         expect($.store.get('key')).toEqual {a:1,b:2,c:true,d:'string'}
 
+    describe 'can save but cannot load expected', ->
+      it 'function', ->
+        $.store.set('key', () ->)
+        expect($.store.get('key')).toEqual undefined
+        $.store.set('key', [() ->])
+        expect($.store.get('key')).toEqual [null]
+
+      it 'null', ->
+        $.store.set('key', null)
+        expect($.store.get('key')).toEqual null
+        $.store.set('key', [null])
+        expect($.store.get('key')).toEqual [null]
+
+      it 'undefined', ->
+        $.store.set('key', undefined)
+        expect($.store.get('key')).toEqual undefined
+        $.store.set('key', [undefined])
+        expect($.store.get('key')).toEqual [null]
+
   describe 'with localStorage and without JSON', ->
     beforeEach ->
       $.store.json_object = null
@@ -78,6 +97,25 @@ describe '$.store', ->
       it 'object(hash)', ->
         $.store.set('key', {a:1,b:2,c:true,d:'string'})
         expect($.store.get('key')).toEqual {a:1,b:2,c:true,d:'string'}
+
+    describe 'can save but cannot load expected', ->
+      it 'function', ->
+        $.store.set('key', () ->)
+        expect($.store.get('key')).toEqual undefined
+        $.store.set('key', [() ->])
+        expect($.store.get('key')).toEqual [null]
+
+      it 'null', ->
+        $.store.set('key', null)
+        expect($.store.get('key')).toEqual null
+        $.store.set('key', [null])
+        expect($.store.get('key')).toEqual [null]
+
+      it 'undefined', ->
+        $.store.set('key', undefined)
+        expect($.store.get('key')).toEqual undefined
+        $.store.set('key', [undefined])
+        expect($.store.get('key')).toEqual [null]
 
   describe 'without localStorage and with JSON', ->
     beforeEach ->
@@ -118,6 +156,25 @@ describe '$.store', ->
       it 'object(hash)', ->
         $.store.set('key', {a:1,b:2,c:true,d:'string'})
         expect($.store.get('key')).toEqual {a:1,b:2,c:true,d:'string'}
+
+    describe 'can save but cannot load expected', ->
+      it 'function', ->
+        $.store.set('key', () ->)
+        expect($.store.get('key')).toEqual undefined
+        $.store.set('key', [() ->])
+        expect($.store.get('key')).toEqual [null]
+
+      it 'null', ->
+        $.store.set('key', null)
+        expect($.store.get('key')).toEqual null
+        $.store.set('key', [null])
+        expect($.store.get('key')).toEqual [null]
+
+      it 'undefined', ->
+        $.store.set('key', undefined)
+        expect($.store.get('key')).toEqual undefined
+        $.store.set('key', [undefined])
+        expect($.store.get('key')).toEqual [null]
 
   describe 'without localStorage and without JSON', ->
     beforeEach ->
@@ -160,3 +217,21 @@ describe '$.store', ->
         $.store.set('key', {a:1,b:2,c:true,d:'string'})
         expect($.store.get('key')).toEqual {a:1,b:2,c:true,d:'string'}
 
+    describe 'can save but cannot load expected', ->
+      it 'function', ->
+        $.store.set('key', () ->)
+        expect($.store.get('key')).toEqual undefined
+        $.store.set('key', [() ->])
+        expect($.store.get('key')).toEqual [null]
+
+      it 'null', ->
+        $.store.set('key', null)
+        expect($.store.get('key')).toEqual null
+        $.store.set('key', [null])
+        expect($.store.get('key')).toEqual [null]
+
+      it 'undefined', ->
+        $.store.set('key', undefined)
+        expect($.store.get('key')).toEqual undefined
+        $.store.set('key', [undefined])
+        expect($.store.get('key')).toEqual [null]
