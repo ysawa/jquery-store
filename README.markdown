@@ -7,7 +7,7 @@ jQuery Store is a light-weight plugin to save and load objects safely. The plugi
 
 ### Light-weight
 
-jquery.store.min.js is just 2.35 kb.
+jquery.store.min.js is just 2.979 kb.
 
 ### Safe
 
@@ -60,7 +60,9 @@ The plugin is tested with Jasmine(1.2.0) and those browsers below passed all spe
 
 ## Further Information
 
-If you use a browser incompatible with localStorage, jQuery Store use only a hash as a storage. Thus, if you reload your browser, all data saved will be removed. (This plugin is not compatible with userData for IE6/7 as other storage plugins.)
+If you use a browser incompatible with localStorage, jQuery Store tries to use userData as a storage. For example, IE6/7 are not compatible with localStorage and adopt userData. When the plugin knows neigher is available, it uses only a hash as a storage. Thus, if you reload your browser in that condition, all data saved will be removed.
+
+Notice userData as a storage is slower and smaller than localStorage. Take care in case you operate large data many times.
 
 
 ## Copyright
