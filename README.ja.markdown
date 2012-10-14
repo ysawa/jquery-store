@@ -42,6 +42,17 @@ jQuery(1.4.1以上) と jquery.store.min.js を読み込めばすぐに使えま
     $.store.remove_all();
 
 
+## Environments
+
+The plugin is tested with Jasmine(1.2.0) and those browsers below passed all specs:
+
+* Safari 6.0 (7536.25) (Mac OS X 10.7.4)
+* Google Chrome 22.0.1229.94 (Mac OS X 10.7.4)
+* Firefox 8.0.1 (Mac OS X 10.7.4)
+* Google Chrome 21.0.1180.89 (Windows XP Service Pack 3)
+* Firefox 7.0.1 (Windows XP Service Pack 3)
+
+
 ## Further Information
 
 If you use a browser incompatible with localStorage, jQuery Store use only a hash as a storage. Thus, if you reload your browser, all data saved will be removed. (The plugin is not compatible with userData for IE6/7 as other storage plugins.)
