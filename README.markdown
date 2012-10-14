@@ -24,7 +24,7 @@ If you use a browser imcompatible with localStorage, some operations around loca
 
 date, function, and undefined are not processed well. This plugin processes those objects as Some implementation of JSON.stringify do.
 
-The data of date is converted to the string of ISO 8601 Time format.
+The datum of date is converted to the string of ISO 8601 Time format.
 
     YYYY-MM-DDThh:mm:ss.sZ (eg 1997-07-16T19:20:30.045Z)
 
