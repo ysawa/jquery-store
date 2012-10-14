@@ -38,9 +38,6 @@ jQuery(1.4.1以上) と jquery.store.min.js を読み込めばすぐに使えま
     // ストレージからオブジェクトを消去する
     $.store.remove('key');
 
-    // ストレージから全てのオブジェクトを消去する
-    $.store.remove_all();
-
 
 ## Environments
 

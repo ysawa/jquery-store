@@ -38,9 +38,6 @@ You can use this plugin if you only include jQuery(1.4.1 or above) and jquery.st
     // remove an object from storage
     $.store.remove('key');
 
-    // remove all object from storage
-    $.store.remove_all();
-
 
 ## Environments
 
