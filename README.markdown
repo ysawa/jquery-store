@@ -52,6 +52,7 @@ The plugin is tested with Jasmine(1.2.0) and those browsers below passed all spe
 * IE 8.0.6001.18702 (Windows XP Service Pack 3)
 * Google Chrome 21.0.1180.89 (Windows XP Service Pack 3)
 * Firefox 7.0.1 (Windows XP Service Pack 3)
+* Opera 11.52 (Windows XP Service Pack 3)
 
 
 ## Further Information

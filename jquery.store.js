@@ -103,15 +103,6 @@
           var string, that, type;
           that = jqstore;
           type = $.type(data);
-          switch (type) {
-            case 'function':
-            case 'undefined':
-              if (root) {
-                return void 0;
-              } else {
-                return 'null';
-              }
-          }
           if (that.json_object) {
             return that.json_object.stringify(data);
           }
@@ -138,6 +129,14 @@
               return that.stringify_json_date(data);
             case 'regexp':
               return '{}';
+            case 'function':
+            case 'undefined':
+              if (root) {
+                return void 0;
+              } else {
+                return 'null';
+              }
+              break;
             case 'null':
               return 'null';
           }
