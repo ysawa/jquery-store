@@ -12,6 +12,9 @@
         value_string
         if that.local_storage_valid
           value_string = that.storage.getItem(key)
+        else if that.user_data_valid
+          that.storage.load(that.user_data_node)
+          value_string = that.storage.getAttribute(key)
         else
           value_string = that.storage[key]
 
@@ -23,17 +26,24 @@
           that.parse_json(value_string)
       initialize: ->
         @local_storage_valid = false
-        unless typeof localStorage == 'undefined'
+        @user_data_valid = false
+        if window.localStorage
           test_key = @generate_key('_test')
           localStorage.setItem(test_key, 'valid')
           value = localStorage.getItem(test_key)
           if value and value == 'valid'
             # localStorage is available
             @local_storage_valid = true
-        if @local_storage_valid
-          @storage = localStorage
-        else
-          # if localStorage is NOT available, use just a hash
+            @storage = localStorage
+        if !@local_storage_valid and
+            navigator.userAgent.toLowerCase().indexOf('msie') != -1 and
+            document.documentElement and
+            document.documentElement.addBehavior
+          @storage = document.createElement(@user_data_node)
+          document.getElementsByTagName('head')[0].appendChild(@storage)
+          @storage.addBehavior('#default#userData')
+          @user_data_valid = true
+        unless @local_storage_valid or @user_data_valid
           @storage = {}
         if window.JSON and window.JSON.stringify
           @json_object = window.JSON
@@ -61,20 +71,20 @@
         key = that.generate_key(key)
         if that.local_storage_valid
           that.storage.removeItem(key)
+        else if that.user_data_valid
+          that.storage.removeAttribute(key)
+          that.storage.save(that.user_data_node)
         else
           delete that.storage[key]
-      remove_all: ->
-        that = jqstore
-        if that.local_storage_valid
-          that.storage.clear()
-        else
-          that.storage = {}
       set: (key, value) ->
         that = jqstore
         value_string = that.stringify_json(value)
         key = that.generate_key(key)
         if that.local_storage_valid
           that.storage.setItem(key, value_string)
+        else if that.user_data_valid
+          that.storage.setAttribute(key, value_string)
+          that.storage.save(that.user_data_node)
         else
           that.storage[key] = value_string
       storage: {}
@@ -127,6 +137,8 @@
         else if milli < 100
           milli = '0' + milli
         "\"#{year}-#{month}-#{day}T#{hour}:#{minute}:#{second}.#{milli}Z\""
+      user_data_valid: false
+      user_data_node: 'jquerystore'
 
   jqstore = $.store
   jqstore.initialize()

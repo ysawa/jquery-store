@@ -15,6 +15,9 @@
 
           if (that.local_storage_valid) {
             value_string = that.storage.getItem(key);
+          } else if (that.user_data_valid) {
+            that.storage.load(that.user_data_node);
+            value_string = that.storage.getAttribute(key);
           } else {
             value_string = that.storage[key];
           }
@@ -29,17 +32,23 @@
         initialize: function() {
           var test_key, value;
           this.local_storage_valid = false;
-          if (typeof localStorage !== 'undefined') {
+          this.user_data_valid = false;
+          if (window.localStorage) {
             test_key = this.generate_key('_test');
             localStorage.setItem(test_key, 'valid');
             value = localStorage.getItem(test_key);
             if (value && value === 'valid') {
               this.local_storage_valid = true;
+              this.storage = localStorage;
             }
           }
-          if (this.local_storage_valid) {
-            this.storage = localStorage;
-          } else {
+          if (!this.local_storage_valid && navigator.userAgent.toLowerCase().indexOf('msie') !== -1 && document.documentElement && document.documentElement.addBehavior) {
+            this.storage = document.createElement(this.user_data_node);
+            document.getElementsByTagName('head')[0].appendChild(this.storage);
+            this.storage.addBehavior('#default#userData');
+            this.user_data_valid = true;
+          }
+          if (!(this.local_storage_valid || this.user_data_valid)) {
             this.storage = {};
           }
           if (window.JSON && window.JSON.stringify) {
@@ -74,17 +83,11 @@
           key = that.generate_key(key);
           if (that.local_storage_valid) {
             return that.storage.removeItem(key);
+          } else if (that.user_data_valid) {
+            that.storage.removeAttribute(key);
+            return that.storage.save(that.user_data_node);
           } else {
             return delete that.storage[key];
-          }
-        },
-        remove_all: function() {
-          var that;
-          that = jqstore;
-          if (that.local_storage_valid) {
-            return that.storage.clear();
-          } else {
-            return that.storage = {};
           }
         },
         set: function(key, value) {
@@ -94,6 +97,9 @@
           key = that.generate_key(key);
           if (that.local_storage_valid) {
             return that.storage.setItem(key, value_string);
+          } else if (that.user_data_valid) {
+            that.storage.setAttribute(key, value_string);
+            return that.storage.save(that.user_data_node);
           } else {
             return that.storage[key] = value_string;
           }
@@ -172,7 +178,9 @@
             milli = '0' + milli;
           }
           return "\"" + year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + "." + milli + "Z\"";
-        }
+        },
+        user_data_valid: false,
+        user_data_node: 'jquerystore'
       }
     });
     jqstore = $.store;
