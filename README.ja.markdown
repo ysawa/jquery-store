@@ -18,9 +18,9 @@ localStorage に対応していないブラウザの場合、 localStorage の�
 * boolean
 * null
 
-date, regexp, function, and undefined are not compatible well.
+date や regexp 、 function 、 undefined は上手く処理できません。これらのオブジェクトは JSON.stringify のある実装に基づいて処理されます。
 
-The data of date is converted to the one of ISO 8601 Time format.
+date のデータは ISO 8601 Time フォーマットに基づいて文字列化されます。
 
     YYYY-MM-DDThh:mm:ss.sZ (eg 1997-07-16T19:20:30.045Z)
 
