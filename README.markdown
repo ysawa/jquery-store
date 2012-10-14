@@ -5,6 +5,10 @@ jQuery Store is a light-weight plugin to save and load objects safely. The plugi
 
 ## Features
 
+### Light-weight
+
+jquery.store.min.js is just 2.35 kb.
+
 ### Safe
 
 If you use a browser imcompatible with localStorage, some operations around localStorage sometimes raise errors. However, this plugin prevents those errors and stopping other important programs. You can use localStorage safely without being frustrated.
