@@ -80,8 +80,15 @@
       storage_valid: false
       stringify_json: (data, root) ->
         that = jqstore
+        type = $.type(data)
+        switch type
+          when 'function', 'undefined'
+            if root
+              return undefined
+            else
+              return 'null'
         return that.json_object.stringify(data) if that.json_object
-        switch $.type(data)
+        switch type
           when 'string'
             return '"' + data.replace(/[\x00-\x1f\\"]/g, that.json_escape_character) + '"'
           when 'array'
@@ -100,11 +107,6 @@
             return that.stringify_json_date(data)
           when 'regexp'
             return '{}'
-          when 'function', 'undefined'
-            if root
-              return undefined
-            else
-              return 'null'
           when 'null'
             return 'null'
         data

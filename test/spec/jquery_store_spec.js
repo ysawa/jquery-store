@@ -65,6 +65,12 @@
           $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 678));
           return expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.678)Z$/);
         });
+        it('regexp', function() {
+          $.store.set('key', /regexp/);
+          expect($.store.get('key')).toEqual({});
+          $.store.set('key', [/regexp/]);
+          return expect($.store.get('key')).toEqual([{}]);
+        });
         it('function', function() {
           $.store.set('key', function() {});
           expect($.store.get('key')).toEqual(void 0);
@@ -145,6 +151,12 @@
           expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.067)Z$/);
           $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 678));
           return expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.678)Z$/);
+        });
+        it('regexp', function() {
+          $.store.set('key', /regexp/);
+          expect($.store.get('key')).toEqual({});
+          $.store.set('key', [/regexp/]);
+          return expect($.store.get('key')).toEqual([{}]);
         });
         it('function', function() {
           $.store.set('key', function() {});
@@ -228,6 +240,12 @@
           $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 678));
           return expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.678)Z$/);
         });
+        it('regexp', function() {
+          $.store.set('key', /regexp/);
+          expect($.store.get('key')).toEqual({});
+          $.store.set('key', [/regexp/]);
+          return expect($.store.get('key')).toEqual([{}]);
+        });
         it('function', function() {
           $.store.set('key', function() {});
           expect($.store.get('key')).toEqual(void 0);
@@ -310,6 +328,12 @@
           expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.067)Z$/);
           $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 678));
           return expect($.store.get('key')).toMatch(/^1999-02-01T18:04:05(|.678)Z$/);
+        });
+        it('regexp', function() {
+          $.store.set('key', /regexp/);
+          expect($.store.get('key')).toEqual({});
+          $.store.set('key', [/regexp/]);
+          return expect($.store.get('key')).toEqual([{}]);
         });
         it('function', function() {
           $.store.set('key', function() {});
