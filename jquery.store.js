@@ -165,6 +165,11 @@
           if (second < 10) {
             second = '0' + second;
           }
+          if (milli < 10) {
+            milli = '00' + milli;
+          } else if (milli < 100) {
+            milli = '0' + milli;
+          }
           return "\"" + year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + "." + milli + "Z\"";
         }
       }

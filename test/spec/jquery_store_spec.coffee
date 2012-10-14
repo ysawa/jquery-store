@@ -41,6 +41,14 @@ describe '$.store', ->
         expect($.store.get('key')).toEqual {a:1,b:2,c:true,d:'string'}
 
     describe 'can save but cannot load expected', ->
+      it 'date', ->
+        $.store.set('key', new Date(2012, 11, 31, 23, 9, 59))
+        expect($.store.get('key')).toEqual '2012-12-31T14:09:59.000Z'
+        $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 67))
+        expect($.store.get('key')).toEqual '1999-02-01T18:04:05.067Z'
+        $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 678))
+        expect($.store.get('key')).toEqual '1999-02-01T18:04:05.678Z'
+
       it 'function', ->
         $.store.set('key', () ->)
         expect($.store.get('key')).toEqual undefined
@@ -99,6 +107,14 @@ describe '$.store', ->
         expect($.store.get('key')).toEqual {a:1,b:2,c:true,d:'string'}
 
     describe 'can save but cannot load expected', ->
+      it 'date', ->
+        $.store.set('key', new Date(2012, 11, 31, 23, 9, 59))
+        expect($.store.get('key')).toEqual '2012-12-31T14:09:59.000Z'
+        $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 67))
+        expect($.store.get('key')).toEqual '1999-02-01T18:04:05.067Z'
+        $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 678))
+        expect($.store.get('key')).toEqual '1999-02-01T18:04:05.678Z'
+
       it 'function', ->
         $.store.set('key', () ->)
         expect($.store.get('key')).toEqual undefined
@@ -158,6 +174,14 @@ describe '$.store', ->
         expect($.store.get('key')).toEqual {a:1,b:2,c:true,d:'string'}
 
     describe 'can save but cannot load expected', ->
+      it 'date', ->
+        $.store.set('key', new Date(2012, 11, 31, 23, 9, 59))
+        expect($.store.get('key')).toEqual '2012-12-31T14:09:59.000Z'
+        $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 67))
+        expect($.store.get('key')).toEqual '1999-02-01T18:04:05.067Z'
+        $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 678))
+        expect($.store.get('key')).toEqual '1999-02-01T18:04:05.678Z'
+
       it 'function', ->
         $.store.set('key', () ->)
         expect($.store.get('key')).toEqual undefined
@@ -218,6 +242,14 @@ describe '$.store', ->
         expect($.store.get('key')).toEqual {a:1,b:2,c:true,d:'string'}
 
     describe 'can save but cannot load expected', ->
+      it 'date', ->
+        $.store.set('key', new Date(2012, 11, 31, 23, 9, 59))
+        expect($.store.get('key')).toEqual '2012-12-31T14:09:59.000Z'
+        $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 67))
+        expect($.store.get('key')).toEqual '1999-02-01T18:04:05.067Z'
+        $.store.set('key', new Date(1999, 1, 2, 3, 4, 5, 678))
+        expect($.store.get('key')).toEqual '1999-02-01T18:04:05.678Z'
+
       it 'function', ->
         $.store.set('key', () ->)
         expect($.store.get('key')).toEqual undefined

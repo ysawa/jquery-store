@@ -121,6 +121,10 @@
         hour = '0' + hour if hour < 10
         minute = '0' + minute if minute < 10
         second = '0' + second if second < 10
+        if milli < 10
+          milli = '00' + milli
+        else if milli < 100
+          milli = '0' + milli
         "\"#{year}-#{month}-#{day}T#{hour}:#{minute}:#{second}.#{milli}Z\""
 
   jqstore = $.store
