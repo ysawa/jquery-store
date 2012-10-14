@@ -10,7 +10,7 @@
         that = jqstore
         key = that.generate_key(key)
         value_string
-        if that.storage_valid
+        if that.local_storage_valid
           value_string = that.storage.getItem(key)
         else
           value_string = that.storage[key]
@@ -22,15 +22,15 @@
         else
           that.parse_json(value_string)
       initialize: ->
-        @storage_valid = false
+        @local_storage_valid = false
         unless typeof localStorage == 'undefined'
           test_key = @generate_key('_test')
           localStorage.setItem(test_key, 'valid')
           value = localStorage.getItem(test_key)
           if value and value == 'valid'
             # localStorage is available
-            @storage_valid = true
-        if @storage_valid
+            @local_storage_valid = true
+        if @local_storage_valid
           @storage = localStorage
         else
           # if localStorage is NOT available, use just a hash
@@ -52,19 +52,20 @@
         that = jqstore
         that.json_special_characters[character] or
           '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4)
+      local_storage_valid: false
       parse_json: (string) ->
         $.parseJSON(string)
       prefix: 'js_'
       remove: (key) ->
         that = jqstore
         key = that.generate_key(key)
-        if that.storage_valid
+        if that.local_storage_valid
           that.storage.removeItem(key)
         else
           delete that.storage[key]
       remove_all: ->
         that = jqstore
-        if that.storage_valid
+        if that.local_storage_valid
           that.storage.clear()
         else
           that.storage = {}
@@ -72,12 +73,11 @@
         that = jqstore
         value_string = that.stringify_json(value)
         key = that.generate_key(key)
-        if that.storage_valid
+        if that.local_storage_valid
           that.storage.setItem(key, value_string)
         else
           that.storage[key] = value_string
       storage: {}
-      storage_valid: false
       stringify_json: (data, root) ->
         that = jqstore
         type = $.type(data)

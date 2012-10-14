@@ -10,7 +10,7 @@
     describe('with localStorage and JSON', function() {
       describe('.storage', function() {
         return it('should be window.localStorage', function() {
-          return expect($.store.storage_valid).toEqual(true);
+          return expect($.store.local_storage_valid).toEqual(true);
         });
       });
       describe('.json_object', function() {
@@ -105,7 +105,7 @@
       });
       describe('.storage', function() {
         return it('should be window.localStorage', function() {
-          return expect($.store.storage_valid).toEqual(true);
+          return expect($.store.local_storage_valid).toEqual(true);
         });
       });
       describe('.json_object', function() {
@@ -197,7 +197,7 @@
     describe('without localStorage and with JSON', function() {
       beforeEach(function() {
         $.store.storage = {};
-        return $.store.storage_valid = false;
+        return $.store.local_storage_valid = false;
       });
       describe('.storage', function() {
         return it('should not be window.localStorage', function() {
@@ -293,7 +293,7 @@
     return describe('without localStorage and without JSON', function() {
       beforeEach(function() {
         $.store.storage = {};
-        $.store.storage_valid = false;
+        $.store.local_storage_valid = false;
         return $.store.json_object = null;
       });
       describe('.storage', function() {
