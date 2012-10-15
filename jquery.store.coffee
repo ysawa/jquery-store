@@ -7,23 +7,23 @@
       generate_key: (key) ->
         "#{@prefix}#{key}"
       get: (key) ->
-        that = jqstore
-        key = that.generate_key(key)
+        j = jqstore
+        key = j.generate_key(key)
         value_string
-        if that.local_storage_valid
-          value_string = that.storage.getItem(key)
-        else if that.user_data_valid
-          that.storage.load(that.user_data_node)
-          value_string = that.storage.getAttribute(key)
+        if j.local_storage_valid
+          value_string = j.storage.getItem(key)
+        else if j.user_data_valid
+          j.storage.load(j.user_data_node)
+          value_string = j.storage.getAttribute(key)
         else
-          value_string = that.storage[key]
+          value_string = j.storage[key]
 
         if typeof value_string == 'undefined' or value_string == null
           value_string
         else if value_string == 'undefined'
           undefined
         else
-          that.parse_json(value_string)
+          j.parse_json(value_string)
       initialize: ->
         @local_storage_valid = false
         @user_data_valid = false
@@ -59,56 +59,56 @@
         '"': '\\"'
         '\\': '\\\\'
       json_escape_character: (character) ->
-        that = jqstore
-        that.json_special_characters[character] or
+        j = jqstore
+        j.json_special_characters[character] or
           '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4)
       local_storage_valid: false
       parse_json: (string) ->
         $.parseJSON(string)
       prefix: 'js_'
       remove: (key) ->
-        that = jqstore
-        key = that.generate_key(key)
-        if that.local_storage_valid
-          that.storage.removeItem(key)
-        else if that.user_data_valid
-          that.storage.removeAttribute(key)
-          that.storage.save(that.user_data_node)
+        j = jqstore
+        key = j.generate_key(key)
+        if j.local_storage_valid
+          j.storage.removeItem(key)
+        else if j.user_data_valid
+          j.storage.removeAttribute(key)
+          j.storage.save(j.user_data_node)
         else
-          delete that.storage[key]
+          delete j.storage[key]
       set: (key, value) ->
-        that = jqstore
-        value_string = that.stringify_json(value)
-        key = that.generate_key(key)
-        if that.local_storage_valid
-          that.storage.setItem(key, value_string)
-        else if that.user_data_valid
-          that.storage.setAttribute(key, value_string)
-          that.storage.save(that.user_data_node)
+        j = jqstore
+        value_string = j.stringify_json(value)
+        key = j.generate_key(key)
+        if j.local_storage_valid
+          j.storage.setItem(key, value_string)
+        else if j.user_data_valid
+          j.storage.setAttribute(key, value_string)
+          j.storage.save(j.user_data_node)
         else
-          that.storage[key] = value_string
+          j.storage[key] = value_string
       storage: {}
       stringify_json: (data, root) ->
-        that = jqstore
+        j = jqstore
         type = $.type(data)
-        return that.json_object.stringify(data) if that.json_object
+        return j.json_object.stringify(data) if j.json_object
         switch type
           when 'string'
-            return '"' + data.replace(/[\x00-\x1f\\"]/g, that.json_escape_character) + '"'
+            return '"' + data.replace(/[\x00-\x1f\\"]/g, j.json_escape_character) + '"'
           when 'array'
-            return '[' + $.map(data, that.stringify_json) + ']'
+            return '[' + $.map(data, j.stringify_json) + ']'
           when 'object'
             string = []
             $.each data, (key, value) ->
-              value_json = that.stringify_json(value)
+              value_json = j.stringify_json(value)
               unless typeof value_json == 'undefined'
-                key_json = that.stringify_json(key)
+                key_json = j.stringify_json(key)
                 string.push "#{key_json}:#{value_json}"
             return '{' + string + '}'
           when 'number', 'boolean'
             return '' + data
           when 'date'
-            return that.stringify_json_date(data)
+            return j.stringify_json_date(data)
           when 'regexp'
             return '{}'
           when 'function', 'undefined'

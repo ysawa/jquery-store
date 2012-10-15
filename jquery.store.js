@@ -8,25 +8,25 @@
           return "" + this.prefix + key;
         },
         get: function(key) {
-          var that, value_string;
-          that = jqstore;
-          key = that.generate_key(key);
+          var j, value_string;
+          j = jqstore;
+          key = j.generate_key(key);
           value_string;
 
-          if (that.local_storage_valid) {
-            value_string = that.storage.getItem(key);
-          } else if (that.user_data_valid) {
-            that.storage.load(that.user_data_node);
-            value_string = that.storage.getAttribute(key);
+          if (j.local_storage_valid) {
+            value_string = j.storage.getItem(key);
+          } else if (j.user_data_valid) {
+            j.storage.load(j.user_data_node);
+            value_string = j.storage.getAttribute(key);
           } else {
-            value_string = that.storage[key];
+            value_string = j.storage[key];
           }
           if (typeof value_string === 'undefined' || value_string === null) {
             return value_string;
           } else if (value_string === 'undefined') {
             return void 0;
           } else {
-            return that.parse_json(value_string);
+            return j.parse_json(value_string);
           }
         },
         initialize: function() {
@@ -68,9 +68,9 @@
           '\\': '\\\\'
         },
         json_escape_character: function(character) {
-          var that;
-          that = jqstore;
-          return that.json_special_characters[character] || '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4);
+          var j;
+          j = jqstore;
+          return j.json_special_characters[character] || '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4);
         },
         local_storage_valid: false,
         parse_json: function(string) {
@@ -78,52 +78,52 @@
         },
         prefix: 'js_',
         remove: function(key) {
-          var that;
-          that = jqstore;
-          key = that.generate_key(key);
-          if (that.local_storage_valid) {
-            return that.storage.removeItem(key);
-          } else if (that.user_data_valid) {
-            that.storage.removeAttribute(key);
-            return that.storage.save(that.user_data_node);
+          var j;
+          j = jqstore;
+          key = j.generate_key(key);
+          if (j.local_storage_valid) {
+            return j.storage.removeItem(key);
+          } else if (j.user_data_valid) {
+            j.storage.removeAttribute(key);
+            return j.storage.save(j.user_data_node);
           } else {
-            return delete that.storage[key];
+            return delete j.storage[key];
           }
         },
         set: function(key, value) {
-          var that, value_string;
-          that = jqstore;
-          value_string = that.stringify_json(value);
-          key = that.generate_key(key);
-          if (that.local_storage_valid) {
-            return that.storage.setItem(key, value_string);
-          } else if (that.user_data_valid) {
-            that.storage.setAttribute(key, value_string);
-            return that.storage.save(that.user_data_node);
+          var j, value_string;
+          j = jqstore;
+          value_string = j.stringify_json(value);
+          key = j.generate_key(key);
+          if (j.local_storage_valid) {
+            return j.storage.setItem(key, value_string);
+          } else if (j.user_data_valid) {
+            j.storage.setAttribute(key, value_string);
+            return j.storage.save(j.user_data_node);
           } else {
-            return that.storage[key] = value_string;
+            return j.storage[key] = value_string;
           }
         },
         storage: {},
         stringify_json: function(data, root) {
-          var string, that, type;
-          that = jqstore;
+          var j, string, type;
+          j = jqstore;
           type = $.type(data);
-          if (that.json_object) {
-            return that.json_object.stringify(data);
+          if (j.json_object) {
+            return j.json_object.stringify(data);
           }
           switch (type) {
             case 'string':
-              return '"' + data.replace(/[\x00-\x1f\\"]/g, that.json_escape_character) + '"';
+              return '"' + data.replace(/[\x00-\x1f\\"]/g, j.json_escape_character) + '"';
             case 'array':
-              return '[' + $.map(data, that.stringify_json) + ']';
+              return '[' + $.map(data, j.stringify_json) + ']';
             case 'object':
               string = [];
               $.each(data, function(key, value) {
                 var key_json, value_json;
-                value_json = that.stringify_json(value);
+                value_json = j.stringify_json(value);
                 if (typeof value_json !== 'undefined') {
-                  key_json = that.stringify_json(key);
+                  key_json = j.stringify_json(key);
                   return string.push("" + key_json + ":" + value_json);
                 }
               });
@@ -132,7 +132,7 @@
             case 'boolean':
               return '' + data;
             case 'date':
-              return that.stringify_json_date(data);
+              return j.stringify_json_date(data);
             case 'regexp':
               return '{}';
             case 'function':
