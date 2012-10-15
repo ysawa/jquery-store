@@ -42,7 +42,7 @@
             $.store.set('key', [1, 2, true, 'string']);
             return expect($.store.get('key')).toEqual([1, 2, true, 'string']);
           });
-          return it('object(hash)', function() {
+          it('object(hash)', function() {
             $.store.set('key', {
               a: 1,
               b: 2,
@@ -55,6 +55,12 @@
               c: true,
               d: 'string'
             });
+          });
+          return it('null', function() {
+            $.store.set('key', null);
+            expect($.store.get('key')).toEqual(null);
+            $.store.set('key', [null]);
+            return expect($.store.get('key')).toEqual([null]);
           });
         });
         describe('can save but cannot load expected', function() {
@@ -76,12 +82,6 @@
             $.store.set('key', function() {});
             expect($.store.get('key')).toEqual(void 0);
             $.store.set('key', [function() {}]);
-            return expect($.store.get('key')).toEqual([null]);
-          });
-          it('null', function() {
-            $.store.set('key', null);
-            expect($.store.get('key')).toEqual(null);
-            $.store.set('key', [null]);
             return expect($.store.get('key')).toEqual([null]);
           });
           return it('undefined', function() {
@@ -137,7 +137,7 @@
             $.store.set('key', [1, 2, true, 'string']);
             return expect($.store.get('key')).toEqual([1, 2, true, 'string']);
           });
-          return it('object(hash)', function() {
+          it('object(hash)', function() {
             $.store.set('key', {
               a: 1,
               b: 2,
@@ -150,6 +150,12 @@
               c: true,
               d: 'string'
             });
+          });
+          return it('null', function() {
+            $.store.set('key', null);
+            expect($.store.get('key')).toEqual(null);
+            $.store.set('key', [null]);
+            return expect($.store.get('key')).toEqual([null]);
           });
         });
         describe('can save but cannot load expected', function() {
@@ -171,12 +177,6 @@
             $.store.set('key', function() {});
             expect($.store.get('key')).toEqual(void 0);
             $.store.set('key', [function() {}]);
-            return expect($.store.get('key')).toEqual([null]);
-          });
-          it('null', function() {
-            $.store.set('key', null);
-            expect($.store.get('key')).toEqual(null);
-            $.store.set('key', [null]);
             return expect($.store.get('key')).toEqual([null]);
           });
           return it('undefined', function() {
@@ -233,7 +233,7 @@
             $.store.set('key', [1, 2, true, 'string']);
             return expect($.store.get('key')).toEqual([1, 2, true, 'string']);
           });
-          return it('object(hash)', function() {
+          it('object(hash)', function() {
             $.store.set('key', {
               a: 1,
               b: 2,
@@ -246,6 +246,12 @@
               c: true,
               d: 'string'
             });
+          });
+          return it('null', function() {
+            $.store.set('key', null);
+            expect($.store.get('key')).toEqual(null);
+            $.store.set('key', [null]);
+            return expect($.store.get('key')).toEqual([null]);
           });
         });
         describe('can save but cannot load expected', function() {
@@ -267,12 +273,6 @@
             $.store.set('key', function() {});
             expect($.store.get('key')).toEqual(void 0);
             $.store.set('key', [function() {}]);
-            return expect($.store.get('key')).toEqual([null]);
-          });
-          it('null', function() {
-            $.store.set('key', null);
-            expect($.store.get('key')).toEqual(null);
-            $.store.set('key', [null]);
             return expect($.store.get('key')).toEqual([null]);
           });
           return it('undefined', function() {
@@ -330,7 +330,7 @@
             $.store.set('key', [1, 2, true, 'string']);
             return expect($.store.get('key')).toEqual([1, 2, true, 'string']);
           });
-          return it('object(hash)', function() {
+          it('object(hash)', function() {
             $.store.set('key', {
               a: 1,
               b: 2,
@@ -343,6 +343,12 @@
               c: true,
               d: 'string'
             });
+          });
+          return it('null', function() {
+            $.store.set('key', null);
+            expect($.store.get('key')).toEqual(null);
+            $.store.set('key', [null]);
+            return expect($.store.get('key')).toEqual([null]);
           });
         });
         describe('can save but cannot load expected', function() {
@@ -364,12 +370,6 @@
             $.store.set('key', function() {});
             expect($.store.get('key')).toEqual(void 0);
             $.store.set('key', [function() {}]);
-            return expect($.store.get('key')).toEqual([null]);
-          });
-          it('null', function() {
-            $.store.set('key', null);
-            expect($.store.get('key')).toEqual(null);
-            $.store.set('key', [null]);
             return expect($.store.get('key')).toEqual([null]);
           });
           return it('undefined', function() {
@@ -419,7 +419,7 @@
             $.store.set('key', [1, 2, true, 'string']);
             return expect($.store.get('key')).toEqual([1, 2, true, 'string']);
           });
-          return it('object(hash)', function() {
+          it('object(hash)', function() {
             $.store.set('key', {
               a: 1,
               b: 2,
@@ -432,6 +432,12 @@
               c: true,
               d: 'string'
             });
+          });
+          return it('null', function() {
+            $.store.set('key', null);
+            expect($.store.get('key')).toEqual(null);
+            $.store.set('key', [null]);
+            return expect($.store.get('key')).toEqual([null]);
           });
         });
         describe('can save but cannot load expected', function() {
@@ -453,12 +459,6 @@
             $.store.set('key', function() {});
             expect($.store.get('key')).toEqual(void 0);
             $.store.set('key', [function() {}]);
-            return expect($.store.get('key')).toEqual([null]);
-          });
-          it('null', function() {
-            $.store.set('key', null);
-            expect($.store.get('key')).toEqual(null);
-            $.store.set('key', [null]);
             return expect($.store.get('key')).toEqual([null]);
           });
           return it('undefined', function() {

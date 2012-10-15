@@ -130,6 +130,7 @@
               return '{' + string + '}';
             case 'number':
             case 'boolean':
+            case 'null':
               return '' + data;
             case 'date':
               return j.stringify_json_date(data);
@@ -142,9 +143,6 @@
               } else {
                 return 'null';
               }
-              break;
-            case 'null':
-              return 'null';
           }
           return data;
         },

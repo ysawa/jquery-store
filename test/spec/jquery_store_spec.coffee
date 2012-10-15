@@ -41,6 +41,12 @@ describe '$.store', ->
           $.store.set('key', {a:1,b:2,c:true,d:'string'})
           expect($.store.get('key')).toEqual {a:1,b:2,c:true,d:'string'}
 
+        it 'null', ->
+          $.store.set('key', null)
+          expect($.store.get('key')).toEqual null
+          $.store.set('key', [null])
+          expect($.store.get('key')).toEqual [null]
+
       describe 'can save but cannot load expected', ->
         it 'date', ->
           $.store.set('key', new Date(2012, 11, 31, 23, 9, 59))
@@ -60,12 +66,6 @@ describe '$.store', ->
           $.store.set('key', () ->)
           expect($.store.get('key')).toEqual undefined
           $.store.set('key', [() ->])
-          expect($.store.get('key')).toEqual [null]
-
-        it 'null', ->
-          $.store.set('key', null)
-          expect($.store.get('key')).toEqual null
-          $.store.set('key', [null])
           expect($.store.get('key')).toEqual [null]
 
         it 'undefined', ->
@@ -120,6 +120,12 @@ describe '$.store', ->
           $.store.set('key', {a:1,b:2,c:true,d:'string'})
           expect($.store.get('key')).toEqual {a:1,b:2,c:true,d:'string'}
 
+        it 'null', ->
+          $.store.set('key', null)
+          expect($.store.get('key')).toEqual null
+          $.store.set('key', [null])
+          expect($.store.get('key')).toEqual [null]
+
       describe 'can save but cannot load expected', ->
         it 'date', ->
           $.store.set('key', new Date(2012, 11, 31, 23, 9, 59))
@@ -139,12 +145,6 @@ describe '$.store', ->
           $.store.set('key', () ->)
           expect($.store.get('key')).toEqual undefined
           $.store.set('key', [() ->])
-          expect($.store.get('key')).toEqual [null]
-
-        it 'null', ->
-          $.store.set('key', null)
-          expect($.store.get('key')).toEqual null
-          $.store.set('key', [null])
           expect($.store.get('key')).toEqual [null]
 
         it 'undefined', ->
@@ -200,6 +200,12 @@ describe '$.store', ->
           $.store.set('key', {a:1,b:2,c:true,d:'string'})
           expect($.store.get('key')).toEqual {a:1,b:2,c:true,d:'string'}
 
+        it 'null', ->
+          $.store.set('key', null)
+          expect($.store.get('key')).toEqual null
+          $.store.set('key', [null])
+          expect($.store.get('key')).toEqual [null]
+
       describe 'can save but cannot load expected', ->
         it 'date', ->
           $.store.set('key', new Date(2012, 11, 31, 23, 9, 59))
@@ -219,12 +225,6 @@ describe '$.store', ->
           $.store.set('key', () ->)
           expect($.store.get('key')).toEqual undefined
           $.store.set('key', [() ->])
-          expect($.store.get('key')).toEqual [null]
-
-        it 'null', ->
-          $.store.set('key', null)
-          expect($.store.get('key')).toEqual null
-          $.store.set('key', [null])
           expect($.store.get('key')).toEqual [null]
 
         it 'undefined', ->
@@ -281,6 +281,12 @@ describe '$.store', ->
           $.store.set('key', {a:1,b:2,c:true,d:'string'})
           expect($.store.get('key')).toEqual {a:1,b:2,c:true,d:'string'}
 
+        it 'null', ->
+          $.store.set('key', null)
+          expect($.store.get('key')).toEqual null
+          $.store.set('key', [null])
+          expect($.store.get('key')).toEqual [null]
+
       describe 'can save but cannot load expected', ->
         it 'date', ->
           $.store.set('key', new Date(2012, 11, 31, 23, 9, 59))
@@ -300,12 +306,6 @@ describe '$.store', ->
           $.store.set('key', () ->)
           expect($.store.get('key')).toEqual undefined
           $.store.set('key', [() ->])
-          expect($.store.get('key')).toEqual [null]
-
-        it 'null', ->
-          $.store.set('key', null)
-          expect($.store.get('key')).toEqual null
-          $.store.set('key', [null])
           expect($.store.get('key')).toEqual [null]
 
         it 'undefined', ->
@@ -355,6 +355,12 @@ describe '$.store', ->
           $.store.set('key', {a:1,b:2,c:true,d:'string'})
           expect($.store.get('key')).toEqual {a:1,b:2,c:true,d:'string'}
 
+        it 'null', ->
+          $.store.set('key', null)
+          expect($.store.get('key')).toEqual null
+          $.store.set('key', [null])
+          expect($.store.get('key')).toEqual [null]
+
       describe 'can save but cannot load expected', ->
         it 'date', ->
           $.store.set('key', new Date(2012, 11, 31, 23, 9, 59))
@@ -374,12 +380,6 @@ describe '$.store', ->
           $.store.set('key', () ->)
           expect($.store.get('key')).toEqual undefined
           $.store.set('key', [() ->])
-          expect($.store.get('key')).toEqual [null]
-
-        it 'null', ->
-          $.store.set('key', null)
-          expect($.store.get('key')).toEqual null
-          $.store.set('key', [null])
           expect($.store.get('key')).toEqual [null]
 
         it 'undefined', ->

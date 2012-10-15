@@ -105,7 +105,7 @@
                 key_json = j.stringify_json(key)
                 string.push "#{key_json}:#{value_json}"
             return '{' + string + '}'
-          when 'number', 'boolean'
+          when 'number', 'boolean', 'null'
             return '' + data
           when 'date'
             return j.stringify_json_date(data)
@@ -116,8 +116,6 @@
               return undefined
             else
               return 'null'
-          when 'null'
-            return 'null'
         data
       stringify_json_date: (data) ->
         year = data.getUTCFullYear()
