@@ -27,6 +27,10 @@ date や regexp 、 function 、 undefined は上手く処理できません。�
 
 date のデータは ISO 8601 Time フォーマットに基づいて文字列化されます。
 
+    YYYY-MM-DDThh:mm:ssZ (eg 1997-07-16T19:20:30Z)
+
+    or
+
     YYYY-MM-DDThh:mm:ss.sZ (eg 1997-07-16T19:20:30.045Z)
 
 
