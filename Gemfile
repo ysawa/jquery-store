@@ -6,7 +6,7 @@ gem 'rb-fsevent', require: false if RUBY_PLATFORM =~ /darwin/i # mac os x
 # gem 'guard-sprockets', :git => "git://github.com/jondot/guard-sprockets.git"
 gem 'uglifier'
 gem 'guard-uglify'
-gem 'guard-process'
+gem 'guard-shell'
 
 # Notifiers
 case RUBY_PLATFORM

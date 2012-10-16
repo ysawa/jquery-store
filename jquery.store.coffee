@@ -9,7 +9,6 @@
       get: (key) ->
         j = jqstore
         key = j.generate_key(key)
-        value_string
         if j.local_storage_valid
           value_string = j.storage.getItem(key)
         else if j.user_data_valid

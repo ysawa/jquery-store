@@ -7,7 +7,7 @@ jQuery Store is a light-weight plugin to save and load objects safely. The plugi
 
 ### Light-weight
 
-jquery.store.min.js is just 2.979 kb.
+jquery.store.min.js is just 2.943 kb.
 
 ### Safe
 
