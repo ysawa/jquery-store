@@ -1,7 +1,7 @@
 (function() {
 
   (function($) {
-    var jqstore, json_escape_character, json_special_characters;
+    var jqstore, json_escape_character, json_special_characters, stringify_date;
     json_special_characters = {
       '\b': '\\b',
       '\t': '\\t',
@@ -13,6 +13,37 @@
     };
     json_escape_character = function(character) {
       return json_special_characters[character] || '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4);
+    };
+    stringify_date = function(data) {
+      var day, hour, milli, minute, month, second, year;
+      year = data.getUTCFullYear();
+      month = data.getUTCMonth() + 1;
+      day = data.getUTCDate();
+      hour = data.getUTCHours();
+      minute = data.getUTCMinutes();
+      second = data.getUTCSeconds();
+      milli = data.getUTCMilliseconds();
+      if (month < 10) {
+        month = '0' + month;
+      }
+      if (day < 10) {
+        day = '0' + day;
+      }
+      if (hour < 10) {
+        hour = '0' + hour;
+      }
+      if (minute < 10) {
+        minute = '0' + minute;
+      }
+      if (second < 10) {
+        second = '0' + second;
+      }
+      if (milli < 10) {
+        milli = '00' + milli;
+      } else if (milli < 100) {
+        milli = '0' + milli;
+      }
+      return "\"" + year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + "." + milli + "Z\"";
     };
     $.extend({
       store: {
@@ -124,7 +155,7 @@
             case 'null':
               return '' + data;
             case 'date':
-              return j.stringify_date(data);
+              return stringify_date(data);
             case 'regexp':
               return '{}';
             case 'function':
@@ -136,37 +167,6 @@
               }
           }
           return data;
-        },
-        stringify_date: function(data) {
-          var day, hour, milli, minute, month, second, year;
-          year = data.getUTCFullYear();
-          month = data.getUTCMonth() + 1;
-          day = data.getUTCDate();
-          hour = data.getUTCHours();
-          minute = data.getUTCMinutes();
-          second = data.getUTCSeconds();
-          milli = data.getUTCMilliseconds();
-          if (month < 10) {
-            month = '0' + month;
-          }
-          if (day < 10) {
-            day = '0' + day;
-          }
-          if (hour < 10) {
-            hour = '0' + hour;
-          }
-          if (minute < 10) {
-            minute = '0' + minute;
-          }
-          if (second < 10) {
-            second = '0' + second;
-          }
-          if (milli < 10) {
-            milli = '00' + milli;
-          } else if (milli < 100) {
-            milli = '0' + milli;
-          }
-          return "\"" + year + "-" + month + "-" + day + "T" + hour + ":" + minute + ":" + second + "." + milli + "Z\"";
         },
         user_data_valid: false,
         user_data_node: 'jquerystore'

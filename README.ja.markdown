@@ -7,7 +7,7 @@ jQuery Store は安全にオブジェクトを保存したり読み込むため�
 
 ### 軽量
 
-jquery.store.min.js はわずか 2.684 kb 。
+jquery.store.min.js はわずか 2.658 kb 。
 
 
 ### 安全

@@ -12,6 +12,24 @@
   json_escape_character = (character) ->
     json_special_characters[character] or
       '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4)
+  stringify_date = (data) ->
+    year = data.getUTCFullYear()
+    month = data.getUTCMonth() + 1
+    day = data.getUTCDate()
+    hour = data.getUTCHours()
+    minute = data.getUTCMinutes()
+    second = data.getUTCSeconds()
+    milli = data.getUTCMilliseconds()
+    month = '0' + month if month < 10
+    day = '0' + day if day < 10
+    hour = '0' + hour if hour < 10
+    minute = '0' + minute if minute < 10
+    second = '0' + second if second < 10
+    if milli < 10
+      milli = '00' + milli
+    else if milli < 100
+      milli = '0' + milli
+    "\"#{year}-#{month}-#{day}T#{hour}:#{minute}:#{second}.#{milli}Z\""
 
   $.extend
     # jqstore = $.store below
@@ -102,7 +120,7 @@
           when 'number', 'boolean', 'null'
             return '' + data
           when 'date'
-            return j.stringify_date(data)
+            return stringify_date(data)
           when 'regexp'
             return '{}'
           when 'function', 'undefined'
@@ -111,24 +129,6 @@
             else
               return 'null'
         data
-      stringify_date: (data) ->
-        year = data.getUTCFullYear()
-        month = data.getUTCMonth() + 1
-        day = data.getUTCDate()
-        hour = data.getUTCHours()
-        minute = data.getUTCMinutes()
-        second = data.getUTCSeconds()
-        milli = data.getUTCMilliseconds()
-        month = '0' + month if month < 10
-        day = '0' + day if day < 10
-        hour = '0' + hour if hour < 10
-        minute = '0' + minute if minute < 10
-        second = '0' + second if second < 10
-        if milli < 10
-          milli = '00' + milli
-        else if milli < 100
-          milli = '0' + milli
-        "\"#{year}-#{month}-#{day}T#{hour}:#{minute}:#{second}.#{milli}Z\""
       user_data_valid: false
       user_data_node: 'jquerystore'
 
