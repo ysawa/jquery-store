@@ -1,7 +1,19 @@
 (function() {
 
   (function($) {
-    var jqstore;
+    var jqstore, json_escape_character, json_special_characters;
+    json_special_characters = {
+      '\b': '\\b',
+      '\t': '\\t',
+      '\n': '\\n',
+      '\f': '\\f',
+      '\r': '\\r',
+      '"': '\\"',
+      '\\': '\\\\'
+    };
+    json_escape_character = function(character) {
+      return json_special_characters[character] || '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4);
+    };
     $.extend({
       store: {
         gen_key: function(key) {
@@ -56,20 +68,6 @@
           }
         },
         json_object: null,
-        json_special_characters: {
-          '\b': '\\b',
-          '\t': '\\t',
-          '\n': '\\n',
-          '\f': '\\f',
-          '\r': '\\r',
-          '"': '\\"',
-          '\\': '\\\\'
-        },
-        json_escape_character: function(character) {
-          var j;
-          j = jqstore;
-          return j.json_special_characters[character] || '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4);
-        },
         local_storage_valid: false,
         remove: function(key) {
           var j;
@@ -107,7 +105,7 @@
           }
           switch ($.type(data)) {
             case 'string':
-              return '"' + data.replace(/[\x00-\x1f\\"]/g, j.json_escape_character) + '"';
+              return '"' + data.replace(/[\x00-\x1f\\"]/g, json_escape_character) + '"';
             case 'array':
               return '[' + $.map(data, j.stringify) + ']';
             case 'object':

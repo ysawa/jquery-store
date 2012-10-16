@@ -1,6 +1,18 @@
 # jQuery Store
 
 (($) ->
+  json_special_characters =
+    '\b': '\\b'
+    '\t': '\\t'
+    '\n': '\\n'
+    '\f': '\\f'
+    '\r': '\\r'
+    '"': '\\"'
+    '\\': '\\\\'
+  json_escape_character = (character) ->
+    json_special_characters[character] or
+      '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4)
+
   $.extend
     # jqstore = $.store below
     store:
@@ -48,18 +60,6 @@
         else
           @json_object = null
       json_object: null
-      json_special_characters:
-        '\b': '\\b'
-        '\t': '\\t'
-        '\n': '\\n'
-        '\f': '\\f'
-        '\r': '\\r'
-        '"': '\\"'
-        '\\': '\\\\'
-      json_escape_character: (character) ->
-        j = jqstore
-        j.json_special_characters[character] or
-          '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4)
       local_storage_valid: false
       remove: (key) ->
         j = jqstore
@@ -88,7 +88,7 @@
         return j.json_object.stringify(data) if j.json_object
         switch $.type(data)
           when 'string'
-            return '"' + data.replace(/[\x00-\x1f\\"]/g, j.json_escape_character) + '"'
+            return '"' + data.replace(/[\x00-\x1f\\"]/g, json_escape_character) + '"'
           when 'array'
             return '[' + $.map(data, j.stringify) + ']'
           when 'object'
