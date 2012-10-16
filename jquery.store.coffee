@@ -4,11 +4,11 @@
   $.extend
     # jqstore = $.store below
     store:
-      generate_key: (key) ->
-        "#{@prefix}#{key}"
+      gen_key: (key) ->
+        "js_#{key}"
       get: (key) ->
         j = jqstore
-        key = j.generate_key(key)
+        key = j.gen_key(key)
         if j.local_storage_valid
           value_string = j.storage.getItem(key)
         else if j.user_data_valid
@@ -16,18 +16,17 @@
           value_string = j.storage.getAttribute(key)
         else
           value_string = j.storage[key]
-
         if typeof value_string == 'undefined' or value_string == null
           value_string
         else if value_string == 'undefined'
           undefined
         else
-          j.parse_json(value_string)
+          $.parseJSON(value_string)
       initialize: ->
         @local_storage_valid = false
         @user_data_valid = false
         if window.localStorage
-          test_key = @generate_key('_test')
+          test_key = @gen_key('_test')
           localStorage.setItem(test_key, 'valid')
           value = localStorage.getItem(test_key)
           if value and value == 'valid'
@@ -35,7 +34,7 @@
             @local_storage_valid = true
             @storage = localStorage
         if !@local_storage_valid and
-            navigator.userAgent.toLowerCase().indexOf('msie') != -1 and
+            $.browser.msie and
             document.documentElement and
             document.documentElement.addBehavior
           @storage = document.createElement(@user_data_node)
@@ -62,12 +61,9 @@
         j.json_special_characters[character] or
           '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4)
       local_storage_valid: false
-      parse_json: (string) ->
-        $.parseJSON(string)
-      prefix: 'js_'
       remove: (key) ->
         j = jqstore
-        key = j.generate_key(key)
+        key = j.gen_key(key)
         if j.local_storage_valid
           j.storage.removeItem(key)
         else if j.user_data_valid
@@ -77,8 +73,8 @@
           delete j.storage[key]
       set: (key, value) ->
         j = jqstore
-        value_string = j.stringify_json(value)
-        key = j.generate_key(key)
+        value_string = j.stringify(value)
+        key = j.gen_key(key)
         if j.local_storage_valid
           j.storage.setItem(key, value_string)
         else if j.user_data_valid
@@ -87,27 +83,26 @@
         else
           j.storage[key] = value_string
       storage: {}
-      stringify_json: (data, root) ->
+      stringify: (data, root) ->
         j = jqstore
-        type = $.type(data)
         return j.json_object.stringify(data) if j.json_object
-        switch type
+        switch $.type(data)
           when 'string'
             return '"' + data.replace(/[\x00-\x1f\\"]/g, j.json_escape_character) + '"'
           when 'array'
-            return '[' + $.map(data, j.stringify_json) + ']'
+            return '[' + $.map(data, j.stringify) + ']'
           when 'object'
             string = []
             $.each data, (key, value) ->
-              value_json = j.stringify_json(value)
+              value_json = j.stringify(value)
               unless typeof value_json == 'undefined'
-                key_json = j.stringify_json(key)
+                key_json = j.stringify(key)
                 string.push "#{key_json}:#{value_json}"
             return '{' + string + '}'
           when 'number', 'boolean', 'null'
             return '' + data
           when 'date'
-            return j.stringify_json_date(data)
+            return j.stringify_date(data)
           when 'regexp'
             return '{}'
           when 'function', 'undefined'
@@ -116,7 +111,7 @@
             else
               return 'null'
         data
-      stringify_json_date: (data) ->
+      stringify_date: (data) ->
         year = data.getUTCFullYear()
         month = data.getUTCMonth() + 1
         day = data.getUTCDate()
