@@ -12,14 +12,14 @@
   json_escape_character = (character) ->
     json_special_characters[character] or
       '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4)
-  stringify_date = (data) ->
-    year = data.getUTCFullYear()
-    month = data.getUTCMonth() + 1
-    day = data.getUTCDate()
-    hour = data.getUTCHours()
-    minute = data.getUTCMinutes()
-    second = data.getUTCSeconds()
-    milli = data.getUTCMilliseconds()
+  stringify_date = (date) ->
+    year = date.getUTCFullYear()
+    month = date.getUTCMonth() + 1
+    day = date.getUTCDate()
+    hour = date.getUTCHours()
+    minute = date.getUTCMinutes()
+    second = date.getUTCSeconds()
+    milli = date.getUTCMilliseconds()
     month = '0' + month if month < 10
     day = '0' + day if day < 10
     hour = '0' + hour if hour < 10

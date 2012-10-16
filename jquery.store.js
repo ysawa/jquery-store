@@ -14,15 +14,15 @@
     json_escape_character = function(character) {
       return json_special_characters[character] || '\\u' + ('0000' + character.charCodeAt(0).toString(16)).slice(-4);
     };
-    stringify_date = function(data) {
+    stringify_date = function(date) {
       var day, hour, milli, minute, month, second, year;
-      year = data.getUTCFullYear();
-      month = data.getUTCMonth() + 1;
-      day = data.getUTCDate();
-      hour = data.getUTCHours();
-      minute = data.getUTCMinutes();
-      second = data.getUTCSeconds();
-      milli = data.getUTCMilliseconds();
+      year = date.getUTCFullYear();
+      month = date.getUTCMonth() + 1;
+      day = date.getUTCDate();
+      hour = date.getUTCHours();
+      minute = date.getUTCMinutes();
+      second = date.getUTCSeconds();
+      milli = date.getUTCMilliseconds();
       if (month < 10) {
         month = '0' + month;
       }
